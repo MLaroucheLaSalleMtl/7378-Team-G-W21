@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: c8a7d5345b5bb4142a3c000a2b49c518
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Bieksa Free Trial
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 54f6dcbae7581094f8b33389fd44823a, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
