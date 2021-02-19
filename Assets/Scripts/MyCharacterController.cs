@@ -1,39 +1,74 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MyCharacterController : MonoBehaviour
 {
     private CharacterController controller;
+    private Animator anim;
     private Vector3 moveVector;
     private float verticalVelocity;
+    [SerializeField] private float speed = 6f;
 
-    public Collider[] attackHitBoxes;
-    public Collider[] attackHurtBoxes;
 
+    //input system 
+    private float inputHor, inputVer = 0f;
+    private bool inputJump = false;
+    private bool inputAttackOne = false;
+    private bool inputAttackTwo = false;
+
+    // Input methods
+    public void OnMove(InputAction.CallbackContext context) // WSAD or left stick
+    {
+        Vector2 v = context.ReadValue<Vector2>();
+        inputHor = v.x;
+        inputVer = v.y;
+    }
+    public void OnJump(InputAction.CallbackContext context) // spacekey or south button
+    {
+        inputJump = context.performed;
+    }
+    public void OnAttackOne(InputAction.CallbackContext context) // U or west button
+    {
+        inputAttackOne = context.performed;
+    }
+    public void OnAttackTwo(InputAction.CallbackContext context) // I or north button
+    {
+        inputAttackTwo = context.performed;
+    }
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        anim = GetComponent<Animator>();
+    }
+
+    private void Animate()
+    {
+        anim.SetFloat("Magnitude", controller.velocity.magnitude);
+        anim.SetFloat("Hor", moveVector.x);
+        anim.SetFloat("Ver", moveVector.y);
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.J))    
+
+        if (inputAttackOne)
         {
-            LaunchAttack(attackHitBoxes[0]);
-            LaunchAttack(attackHurtBoxes[0]);
+            anim.SetTrigger("AttackOne");
+            inputAttackOne = false;
         }
-        if (Input.GetKeyDown(KeyCode.H))
+        if (inputAttackTwo)
         {
-            LaunchAttack(attackHitBoxes[1]);
-            LaunchAttack(attackHurtBoxes[1]);
+            anim.SetTrigger("AttackTwo");
+            inputAttackTwo = false;
         }
 
         if (controller.isGrounded)
         {
             verticalVelocity = -1;
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (inputJump)
             {
                 verticalVelocity = 10;
             }
@@ -44,26 +79,14 @@ public class MyCharacterController : MonoBehaviour
         }
 
         moveVector = Vector3.zero;
-        moveVector.x = Input.GetAxis("Horizontal") * 5;
+        moveVector = new Vector3(-inputHor, inputVer, 0);
+        moveVector *= speed;
         moveVector.y = verticalVelocity;
 
+
         controller.Move(moveVector * Time.deltaTime);
-        
-    }
+        Animate();
 
-    private void LaunchAttack(Collider col)
-    {
-        var cols = Physics.OverlapBox(col.bounds.center, col.bounds.extents, col.transform.rotation, LayerMask.GetMask("Hurtbox"));
-        foreach(Collider c in cols)
-        {
-            if (c.transform.root == transform) //used to check if im hitting my self 
-            {
-                continue;
-            }
-
-            Debug.Log(c.name);
-  
-        }
     }
 
 }
@@ -84,3 +107,6 @@ public class MyCharacterController : MonoBehaviour
 //        Debug.Log("Unable to identify body part, name must match case");
 //        break;
 //}
+
+
+

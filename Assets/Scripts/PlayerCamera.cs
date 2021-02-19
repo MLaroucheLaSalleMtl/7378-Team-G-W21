@@ -7,6 +7,7 @@ public class PlayerCamera : MonoBehaviour
     private Transform[] playerTransforms;
     [SerializeField] private float yOffset = 2.0f;
     [SerializeField] private float minDistance = 7.5f;
+    [SerializeField] private float maxDistance = 20.0f;
 
     [SerializeField] private float xMin, xMax, yMin, yMax;
     private float xMiddle;
@@ -64,7 +65,12 @@ public class PlayerCamera : MonoBehaviour
         {
             distance = minDistance;
         }
-
+        /*
+        if (distance > maxDistance)
+        {
+            distance = maxDistance;
+        }
+        */
         transform.position = new Vector3(xMiddle, yMiddle + yOffset, distance - 10);
     }
 }
