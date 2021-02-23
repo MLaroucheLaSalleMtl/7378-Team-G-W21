@@ -10,6 +10,8 @@ public class MyCharacterController : MonoBehaviour
     private Vector3 moveVector;
     private float verticalVelocity;
     [SerializeField] private float speed = 6f;
+    [SerializeField] private float jumpSpeed = 10f;
+    [SerializeField] private float fallSpeed = 14f;
 
 
     //input system 
@@ -17,24 +19,41 @@ public class MyCharacterController : MonoBehaviour
     private bool inputJump = false;
     private bool inputAttackOne = false;
     private bool inputAttackTwo = false;
+    private bool isFrozen = false;
 
     // Input methods
     public void OnMove(InputAction.CallbackContext context) // WSAD or left stick
     {
+        if (isFrozen)
+        {
+            return;
+        }
         Vector2 v = context.ReadValue<Vector2>();
         inputHor = v.x;
         inputVer = v.y;
     }
     public void OnJump(InputAction.CallbackContext context) // spacekey or south button
     {
+        if (isFrozen)
+        {
+            return;
+        }
         inputJump = context.performed;
     }
     public void OnAttackOne(InputAction.CallbackContext context) // U or west button
     {
+        if (isFrozen)
+        {
+            return;
+        }
         inputAttackOne = context.performed;
     }
     public void OnAttackTwo(InputAction.CallbackContext context) // I or north button
     {
+        if (isFrozen)
+        {
+            return;
+        }
         inputAttackTwo = context.performed;
     }
 
@@ -53,6 +72,14 @@ public class MyCharacterController : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.instance.isDead)
+        {
+            if (GameManager.instance.CurrentHealthPlayer1 == 0)
+            {
+                //figure this ouit 
+            }
+            anim.SetBool("isDead", true);
+        }
 
         if (inputAttackOne)
         {
@@ -65,17 +92,19 @@ public class MyCharacterController : MonoBehaviour
             inputAttackTwo = false;
         }
 
+
+            
         if (controller.isGrounded)
         {
             verticalVelocity = -1;
             if (inputJump)
             {
-                verticalVelocity = 10;
+                verticalVelocity = jumpSpeed;
             }
         }
         else
         {
-            verticalVelocity -= 14 * Time.deltaTime;
+            verticalVelocity -= fallSpeed * Time.deltaTime;
         }
 
         moveVector = Vector3.zero;
@@ -86,27 +115,33 @@ public class MyCharacterController : MonoBehaviour
 
         controller.Move(moveVector * Time.deltaTime);
         Animate();
+    }
 
+    public void FreezePlayerControl()
+    {
+        isFrozen = true;
+        inputHor = 0;
+        inputVer = 0;
+    }
+
+    public void UnFreezePlayerControl()
+    {
+        isFrozen = false;
     }
 
 }
 
 
+// use lerp to smooth animations 
+//[SerializeField] private float lerpTime = 0.05f;
 
-// how to do damage
-//float damage = 0; 
-//switch (c.name)
-//{
-//    case "Head":
-//        damage = 30;
-//        break;
-//    case "torso":
-//        damage = 10;
-//        break;
-//    default:
-//        Debug.Log("Unable to identify body part, name must match case");
-//        break;
-//}
+//Vector3 targetVelocity = moveVector * speed;
+
+//targetVelocity.y = verticalVelocity;
+//Vector3 nextVelocity = Vector3.Lerp(controller.velocity, targetVelocity, lerpTime * Time.deltaTime);
+
+//controller.Move(nextVelocity * Time.deltaTime);
+
 
 
 
