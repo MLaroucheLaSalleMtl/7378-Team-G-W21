@@ -14,7 +14,7 @@ public class MyCharacterController : MonoBehaviour
     [SerializeField] private float fallSpeed = 14f;
 
 
-    //input system 
+    //Input system 
     private float inputHor, inputVer = 0f;
     private bool inputJump = false;
     private bool inputAttackOne = false;
@@ -72,14 +72,6 @@ public class MyCharacterController : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.instance.isDead)
-        {
-            if (GameManager.instance.CurrentHealthPlayer1 == 0)
-            {
-                //figure this ouit 
-            }
-            anim.SetBool("isDead", true);
-        }
 
         if (inputAttackOne)
         {

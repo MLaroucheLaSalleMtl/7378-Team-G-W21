@@ -22,6 +22,7 @@ public class TestDraw : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
             var selection = hit.transform;
+
             if (selection.CompareTag("Wall"))
             {
                 Debug.Log("wall");

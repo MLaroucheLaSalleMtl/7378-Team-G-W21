@@ -6,25 +6,36 @@ public class AttackSystem : MonoBehaviour
 {
     public Collider[] colliders;
 
+    private GameObject otherPlayer;
+
     private float damage = 0;
+
 
     private void LaunchAttackOne() 
     {
 
         damage = 20f;
 
+        
+
         var cols = Physics.OverlapBox(colliders[0].bounds.center, colliders[0].bounds.extents, colliders[0].transform.rotation, LayerMask.GetMask("Hurtbox"));
         foreach (Collider c in cols)
         {
 
-            if (c.transform.root == transform) //used to check if im hitting my self 
+            if (c.transform.root == transform) //used to check if i'm hitting myself 
             {
                 continue;
             }
 
+            if (c.transform.root.CompareTag("Player"))  
+            {
+                Debug.Log(c.transform.root.name);
+                otherPlayer = c.transform.root.gameObject;
+            }
+
             Debug.Log(c.name);
 
-            GameManager.instance.ReceivingDamage(damage, gameObject);
+            GameManager.instance.ReceivingDamage(damage, gameObject, otherPlayer);
             
         }
 
@@ -35,7 +46,7 @@ public class AttackSystem : MonoBehaviour
         var cols = Physics.OverlapBox(colliders[1].bounds.center, colliders[1].bounds.extents, colliders[1].transform.rotation, LayerMask.GetMask("Hurtbox"));
         foreach (Collider c in cols)
         {
-            if (c.transform.root == transform) //used to check if im hitting my self 
+            if (c.transform.root == transform) //used to check if i'm hitting myself 
             {
                 continue;
             }

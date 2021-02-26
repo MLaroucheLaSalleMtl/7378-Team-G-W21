@@ -11,22 +11,26 @@ public class GameManager : MonoBehaviour
     public GameObject player1;
     public GameObject player2;
 
-
-    //Health Bars
+    //Health Bar Player 1
     public Image currentHealthBarOne;
     public Text ratioTextOne;
 
+    //Health Bar Player 2
     public Image currentHealthBarTwo;
     public Text ratioTextTwo;
-
-
 
     //Properties
     public float DamageTaken { get; set; }
     public float CurrentHealthPlayer1 { get; set; } = 100f;
     public float CurrentHealthPlayer2 { get; set; } = 100f;
-    public bool isDead { get; set; } = false;
+    public bool IsDeadBool { get; set; } = false;
+    public float timeCounter = 0f;
 
+    //------------------- Definitive GM (in progresss...) ------------------------
+
+    private List<FighterStatus> fighterStatus;
+
+    //----------------------------------------------------------------------------
 
     private void Awake()
     {
@@ -42,13 +46,12 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        isDead = false;
+        IsDeadBool = false;
     }
 
 
     void Update()
     {
-        IsDead();
         UpdateHealth();
 
         if (Input.GetKey("escape"))
@@ -72,11 +75,20 @@ public class GameManager : MonoBehaviour
     public void UpdateHealth()
     {
         HealthPOne();
+        if(CurrentHealthPlayer1 == 0)
+        {
+            IsDead();
+        }
+
         HealthPTwo();
+        if(CurrentHealthPlayer2 == 0)
+        {
+            IsDead();
+        }
     }
 
 
-    public void ReceivingDamage(float damage, GameObject obj)
+    public void ReceivingDamage(float damage, GameObject obj, GameObject obj2)
     {
         DamageTaken = damage;
 
@@ -92,14 +104,8 @@ public class GameManager : MonoBehaviour
 
     public void IsDead()
     {
-        if (CurrentHealthPlayer1 == 0)
-        {
-            isDead = true;
-        }
-        if (CurrentHealthPlayer2 == 0)
-        {
-            isDead = true;
-        }
+        IsDeadBool = true;
+        //plays death animation
     }
 
     public void ExitGame()
