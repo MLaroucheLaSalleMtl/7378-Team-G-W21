@@ -10,13 +10,9 @@ public class AttackSystem : MonoBehaviour
 
     private float damage = 0;
 
-
     private void LaunchAttackOne() 
     {
-
         damage = 20f;
-
-        
 
         var cols = Physics.OverlapBox(colliders[0].bounds.center, colliders[0].bounds.extents, colliders[0].transform.rotation, LayerMask.GetMask("Hurtbox"));
         foreach (Collider c in cols)
@@ -27,7 +23,7 @@ public class AttackSystem : MonoBehaviour
                 continue;
             }
 
-            if (c.transform.root.CompareTag("Player"))  
+            if (c.transform.root.CompareTag("Player2"))  //it works when the scrip is attached to player1, so otherPlayer is Player2
             {
                 Debug.Log(c.transform.root.name);
                 otherPlayer = c.transform.root.gameObject;
@@ -35,14 +31,16 @@ public class AttackSystem : MonoBehaviour
 
             Debug.Log(c.name);
 
-            GameManager.instance.ReceivingDamage(damage, gameObject, otherPlayer);
-            
-        }
+            //gameObject -> attacking //otherPlayer -> being attacked
 
+            otherPlayer.GetComponent<FighterStatus>().ReceiveDamage(damage);
+        }
     }
 
     private void LaunchAttackTwo()
     {
+        damage = 25f;
+
         var cols = Physics.OverlapBox(colliders[1].bounds.center, colliders[1].bounds.extents, colliders[1].transform.rotation, LayerMask.GetMask("Hurtbox"));
         foreach (Collider c in cols)
         {
@@ -53,11 +51,21 @@ public class AttackSystem : MonoBehaviour
 
             Debug.Log(c.name);
 
-        }
+            if (c.transform.root.CompareTag("Player2"))  //it works when the scrip is attached to player1, so otherPlayer is Player2
+            {
+                Debug.Log(c.transform.root.name);
+                otherPlayer = c.transform.root.gameObject;
+            }
 
+            Debug.Log(c.name);
+
+            //gameObject -> attacking //otherPlayer -> being attacked
+
+            otherPlayer.GetComponent<FighterStatus>().ReceiveDamage(damage);
+
+        }
     }
 }
-
 
 // how to do damage
 //float damage = 0; 

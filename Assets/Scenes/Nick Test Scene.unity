@@ -314,7 +314,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 73361691}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -2519,9 +2519,10 @@ GameObject:
   - component: {fileID: 287391519}
   - component: {fileID: 287391518}
   - component: {fileID: 287391517}
+  - component: {fileID: 287391522}
   m_Layer: 0
   m_Name: Character_Two
-  m_TagString: Player
+  m_TagString: Player2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2610,6 +2611,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &287391522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 287391516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72f25d01e9d1a74428520ee135a05d4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 287391520}
+  healthBar: {fileID: 1047437624}
+  ratioText: {fileID: 1099458040}
+  health: 100
+  punchDamage: 20
+  kickDamage: 0
 --- !u!1 &319537796
 GameObject:
   m_ObjectHideFlags: 0
@@ -2730,7 +2749,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 335558950}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -3016,9 +3035,10 @@ GameObject:
   - component: {fileID: 424232170}
   - component: {fileID: 424232173}
   - component: {fileID: 424232174}
+  - component: {fileID: 424232175}
   m_Layer: 0
   m_Name: Character_One
-  m_TagString: Player
+  m_TagString: Player1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3107,6 +3127,24 @@ MonoBehaviour:
   colliders:
   - {fileID: 690418078}
   - {fileID: 1343373360}
+--- !u!114 &424232175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424232169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72f25d01e9d1a74428520ee135a05d4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 424232171}
+  healthBar: {fileID: 2017157056}
+  ratioText: {fileID: 362470115}
+  health: 100
+  punchDamage: 20
+  kickDamage: 0
 --- !u!1 &436434841
 GameObject:
   m_ObjectHideFlags: 0
@@ -3286,7 +3324,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 550006870}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -5632,12 +5670,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f79e413478fa7a24fa173991fe5bbb49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1: {fileID: 424232169}
-  player2: {fileID: 287391516}
-  currentHealthBarOne: {fileID: 2017157056}
-  ratioTextOne: {fileID: 362470115}
-  currentHealthBarTwo: {fileID: 1047437624}
-  ratioTextTwo: {fileID: 1099458040}
   timeCounter: 0
 --- !u!4 &1387281740
 Transform:

@@ -211,7 +211,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Mma Kick
+  m_Name: AttackTwo
   m_Speed: 2.1
   m_CycleOffset: 0
   m_Transitions:
@@ -245,43 +245,43 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Ver
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Magnitude
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: AttackOne
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: AttackTwo
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isHit
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isDead
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -364,7 +364,7 @@ AnimatorStateMachine:
     m_Position: {x: -320, y: 30, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 9079495418620601549}
-    m_Position: {x: -560, y: -110, z: 0}
+    m_Position: {x: -600, y: -130, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1067808154848975867}
     m_Position: {x: -190, y: 160, z: 0}
@@ -373,13 +373,13 @@ AnimatorStateMachine:
     m_Position: {x: -470, y: 160, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -300389897097523963}
-    m_Position: {x: -50, y: -120, z: 0}
+    m_Position: {x: -40, y: -130, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2695351863199459149}
-    m_Position: {x: -320, y: -80, z: 0}
+    m_Position: {x: -330, y: -90, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8357845172932151019}
-    m_Position: {x: -100, y: -260, z: 0}
+    m_Position: {x: -90, y: -260, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: -1432907204849113523}
@@ -389,7 +389,7 @@ AnimatorStateMachine:
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: -300, y: -180, z: 0}
+  m_AnyStatePosition: {x: -330, y: -210, z: 0}
   m_EntryPosition: {x: -640, y: 50, z: 0}
   m_ExitPosition: {x: -640, y: -10, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
@@ -555,7 +555,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Punch
+  m_Name: AttackOne
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
