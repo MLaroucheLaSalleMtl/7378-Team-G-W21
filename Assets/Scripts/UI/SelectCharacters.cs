@@ -76,11 +76,11 @@ public class SelectCharacters : MonoBehaviour
         StartCoroutine(waitShowtxt());
     }
 
-    public void GoLevel()
-    {
+    //public void GoLevel()
+    //{
 
-       Application.LoadLevel("level");
-    }
+    //   Application.LoadLevel("level");
+    //}
 
 
     IEnumerator waitShowtxt()

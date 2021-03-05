@@ -38,7 +38,7 @@ public class FighterStatus : MonoBehaviour
         if (health <= 0)
         {
             dead = true;
-            gameObject.tag = "Dead";
+            //gameObject.tag = "Dead";
             Debug.Log("Dead");
             animator.SetBool("isDead", true);
         }

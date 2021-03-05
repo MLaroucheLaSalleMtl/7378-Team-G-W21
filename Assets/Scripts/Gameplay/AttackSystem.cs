@@ -49,8 +49,6 @@ public class AttackSystem : MonoBehaviour
                 continue;
             }
 
-            Debug.Log(c.name);
-
             if (c.transform.root.CompareTag("Player2"))  //it works when the scrip is attached to player1, so otherPlayer is Player2
             {
                 Debug.Log(c.transform.root.name);
@@ -63,6 +61,43 @@ public class AttackSystem : MonoBehaviour
 
             otherPlayer.GetComponent<FighterStatus>().ReceiveDamage(damage);
 
+        }
+    }
+
+    public Collider HitLocation(Collider hurtBox)
+    {
+        /*
+        switch (hurtBox.gameObject.name)
+        {
+            case "Head_HurtBox":
+                Debug.Log(hurtBox.name);
+                return hurtBox;
+            case "Torso_HurtBox":
+                Debug.Log(hurtBox.name);
+                return hurtBox;
+            case "Leg_HurtBox":
+                Debug.Log(hurtBox.name);
+                return hurtBox;
+            default:
+                Debug.Log(hurtBox.name);
+                return hurtBox;
+        }
+        */
+
+        if(hurtBox.gameObject.name == "Head_HurtBox")
+        {
+            Debug.Log(hurtBox.name);
+            return hurtBox;
+        }
+        else if (hurtBox.gameObject.name == "Torso_HurtBox")
+        {
+            Debug.Log(hurtBox.name);
+            return hurtBox;
+        }
+        else
+        {
+            Debug.Log(hurtBox.name);
+            return hurtBox;
         }
     }
 }
