@@ -27,7 +27,7 @@
                     "id": "e68cc317-252a-43bb-8397-1e45fa5e30a8",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Hold"
+                    "interactions": "Press(behavior=2)"
                 },
                 {
                     "name": "Attack 1",
