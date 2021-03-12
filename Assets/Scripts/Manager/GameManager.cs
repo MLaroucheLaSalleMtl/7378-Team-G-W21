@@ -14,7 +14,6 @@ public class GameManager : MonoBehaviour
     public float timeCounter = 0f;
     private bool roundIsEnded = false;
 
-
     public int roundCounterP1Int { get; set; }
     public int roundCounterP2Int { get; set; }
 
@@ -31,7 +30,6 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
     }
 
     void Start()
@@ -55,36 +53,32 @@ public class GameManager : MonoBehaviour
         fighterStatus.Add(currentP2FighterStatus);
     }
 
-
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))   
-        {
-            ExitGame();
-        }
-
         RoundEnded();
     }
 
     public void RoundEnded()
     {
-        if(roundCounterP2Int == 2)
+        if(roundCounterP1Int == 2 || roundCounterP2Int == 2)
         {
             matchFullyEnded = true;
             StartCoroutine(waitForEnd());
         }
 
+        if (fighterStatus[0].health <= 0)
+        {
+            roundIsEnded = true;    
+            roundCounterP2Int++;
+            LoadNewRound();
+
+        }
         if (fighterStatus[1].health <= 0)
         {
             roundIsEnded = true;
-            roundCounterP2Int++;
+            roundCounterP1Int++;
             LoadNewRound();
         }
-
-        //checks which player won the round, then increment a counter by 1
-        //update UI
-        //resets the scene
-        //check if the match is ended
     }
 
     public void LoadNewRound()
@@ -93,7 +87,6 @@ public class GameManager : MonoBehaviour
         {
             roundIsEnded = false;
         }
-        fighterStatus[1].health = 100f;
         fighterStatus.Clear();
         LoadScene.instance.ReloadScene();
         SceneManager.sceneLoaded += OnSceneLoaded;

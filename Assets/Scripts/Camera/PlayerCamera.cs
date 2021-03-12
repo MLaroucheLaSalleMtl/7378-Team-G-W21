@@ -15,11 +15,17 @@ public class PlayerCamera : MonoBehaviour
     private float yMiddle;
     private float distance;
 
+    private List<GameObject> playerList = new List<GameObject>();
+
     void Start()
     {
-        GameObject[] playerList = GameObject.FindGameObjectsWithTag("Player");
-        playerTransforms = new Transform[playerList.Length];
-        for(int i = 0; i < playerList.Length; i++)
+        GameObject player1 = GameObject.FindGameObjectWithTag("Player1");
+        playerList.Add(player1);
+        GameObject player2 = GameObject.FindGameObjectWithTag("Player2");
+        playerList.Add(player2);
+        playerTransforms = new Transform[2];
+
+        for(int i = 0; i < 2; i++)
         {
             playerTransforms[i] = playerList[i].transform;
         }

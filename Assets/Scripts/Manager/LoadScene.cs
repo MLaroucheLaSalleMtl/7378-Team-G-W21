@@ -7,7 +7,6 @@ public class LoadScene : MonoBehaviour
 {
     public static LoadScene instance = null;
 
-    // Awake is called when the script instance is being loaded
     private void Awake()
     {
         if (instance == null)

@@ -13,13 +13,13 @@ public class MyCharacterController : MonoBehaviour
     [SerializeField] private float jumpSpeed = 10f;
     [SerializeField] private float fallSpeed = 14f;
 
-
     //Input system 
-    private float inputHor, inputVer = 0f;
+    public float inputHor, inputVer = 0f;
     private bool inputJump = false;
     private bool inputAttackOne = false;
     private bool inputAttackTwo = false;
     private bool isFrozen = false;
+    public bool isBlocking = false;
 
     // Input methods
     public void OnMove(InputAction.CallbackContext context) // WSAD or left stick
@@ -56,6 +56,14 @@ public class MyCharacterController : MonoBehaviour
         }
         inputAttackTwo = context.performed;
     }
+    public void OnBlocking(InputAction.CallbackContext context) // K or RB
+    {
+        if (isFrozen)
+        {
+            return;
+        }
+        isBlocking = context.performed;
+    }
 
     void Start()
     {
@@ -72,19 +80,22 @@ public class MyCharacterController : MonoBehaviour
 
     void Update()
     {
-
         if (inputAttackOne)
         {
-            anim.SetTrigger("AttackOne");
+            gameObject.GetComponent<FighterAnimation>().PunchAnimation();
             inputAttackOne = false;
         }
         if (inputAttackTwo)
         {
-            anim.SetTrigger("AttackTwo");
+            gameObject.GetComponent<FighterAnimation>().KickAnimation();
             inputAttackTwo = false;
         }
 
 
+        if (isBlocking)
+        {
+            gameObject.GetComponent<FighterAnimation>().BlockAnimation();
+        }
             
         if (controller.isGrounded)
         {
@@ -104,7 +115,6 @@ public class MyCharacterController : MonoBehaviour
         moveVector *= speed;
         moveVector.y = verticalVelocity;
 
-
         controller.Move(moveVector * Time.deltaTime);
         Animate();
     }
@@ -119,6 +129,11 @@ public class MyCharacterController : MonoBehaviour
     public void UnFreezePlayerControl()
     {
         isFrozen = false;
+    }
+
+    public void StopBlocking()
+    {
+        gameObject.GetComponent<FighterAnimation>().StopTheBlock();
     }
 
 }

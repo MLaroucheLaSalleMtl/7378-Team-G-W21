@@ -22,6 +22,14 @@
                     "interactions": ""
                 },
                 {
+                    "name": "Blocking",
+                    "type": "Button",
+                    "id": "e68cc317-252a-43bb-8397-1e45fa5e30a8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold"
+                },
+                {
                     "name": "Attack 1",
                     "type": "Button",
                     "id": "efe5673a-1d59-40d4-8329-b5de543877c1",
@@ -33,6 +41,14 @@
                     "name": "Attack 2",
                     "type": "Button",
                     "id": "b2e2b3ef-ea20-4edb-a69b-fc8d644f160b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Attack 3 Special",
+                    "type": "Button",
+                    "id": "047c827e-c240-4126-82d3-a8361e73a610",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -234,6 +250,39 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e9202480-d2bf-47ab-8146-a21c99537f38",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack 3 Special",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "03818dae-5999-4ee2-b96f-209294023117",
+                    "path": "<Keyboard>/k",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Blocking",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d97eb7da-6589-4815-b071-26e329327bca",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Blocking",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

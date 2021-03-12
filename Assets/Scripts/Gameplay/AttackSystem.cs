@@ -66,24 +66,6 @@ public class AttackSystem : MonoBehaviour
 
     public Collider HitLocation(Collider hurtBox)
     {
-        /*
-        switch (hurtBox.gameObject.name)
-        {
-            case "Head_HurtBox":
-                Debug.Log(hurtBox.name);
-                return hurtBox;
-            case "Torso_HurtBox":
-                Debug.Log(hurtBox.name);
-                return hurtBox;
-            case "Leg_HurtBox":
-                Debug.Log(hurtBox.name);
-                return hurtBox;
-            default:
-                Debug.Log(hurtBox.name);
-                return hurtBox;
-        }
-        */
-
         if(hurtBox.gameObject.name == "Head_HurtBox")
         {
             Debug.Log(hurtBox.name);
@@ -101,18 +83,3 @@ public class AttackSystem : MonoBehaviour
         }
     }
 }
-
-// how to do damage
-//float damage = 0; 
-//switch (c.name)
-//{
-//    case "Head":
-//        damage = 30;
-//        break;
-//    case "torso":
-//        damage = 10;
-//        break;
-//    default:
-//        Debug.Log("Unable to identify body part, name must match case");
-//        break;
-//}
