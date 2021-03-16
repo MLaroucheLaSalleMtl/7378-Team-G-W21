@@ -7,6 +7,10 @@ TagManager:
   - Wall
   - Player1
   - Player2
+  - HealthBarP1
+  - RatioTextP1
+  - HealthBarP2
+  - RatioTextP2
   layers:
   - Default
   - TransparentFX

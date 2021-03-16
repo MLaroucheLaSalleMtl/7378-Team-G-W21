@@ -8,4 +8,14 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main Menu.unity
     guid: b196bdffde82762438254ed277e5263a
-  m_configObjects: {}
+  - enabled: 1
+    path: Assets/Scenes/Nick-Eduardo Test Scene.unity
+    guid: 8cc531161cee89e458e505936aa0581c
+  - enabled: 1
+    path: Assets/Scenes/Hayedeh Select Character.unity
+    guid: 514ec842f27ac444cb8ac1a0928ac8b3
+  - enabled: 1
+    path: Assets/Scenes/level.unity
+    guid: dc3aa0a448787f147b418b2b63242a9d
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 5a8db9b3d25bd7a4486ea2631ad078ec, type: 2}

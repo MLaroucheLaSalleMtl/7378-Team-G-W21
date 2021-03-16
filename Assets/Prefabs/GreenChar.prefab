@@ -1986,7 +1986,7 @@ GameObject:
   - component: {fileID: 1764898993284670468}
   - component: {fileID: 2097771723}
   m_Layer: 0
-  m_Name: Character_Male_V1
+  m_Name: RedChar
   m_TagString: Player1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -256,10 +256,21 @@
                 {
                     "name": "",
                     "id": "e9202480-d2bf-47ab-8146-a21c99537f38",
-                    "path": "",
+                    "path": "<Keyboard>/o",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Attack 3 Special",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8f6864bf-242d-4dfb-8248-4d7677eeecaf",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
                     "action": "Attack 3 Special",
                     "isComposite": false,
                     "isPartOfComposite": false

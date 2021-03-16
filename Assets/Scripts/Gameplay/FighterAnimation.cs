@@ -38,23 +38,20 @@ public class FighterAnimation : MonoBehaviour
 
     }
 
-    public void BlockAnimation()
+    public void BlockAnimation(bool isBlocking)
     {
-        animator.SetBool("isBlocking 0", true);
+        animator.SetBool("IsBlocking", isBlocking);
     }
 
-    public void StopTheBlock()
-    {
-        animator.SetBool("isBlocking 0", false);
-    }
-
-    public void SpecialMove()
+    public void SpecialAnimation()
     {
         switch (characterNumber)
         {
-            case 1:
+            case 0:
+                animator.SetTrigger("SpecialAttack0");
                 break;
-            case 2:
+            case 1:
+                animator.SetTrigger("SpecialAttack1");
                 break;
             default:
                 break;

@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
 
     private List<FighterStatus> fighterStatus = new List<FighterStatus>();
 
+    //private CharacterSelection characterSelection;
+
     //Properties
     public float timeCounter = 0f;
     private bool roundIsEnded = false;
@@ -35,13 +37,29 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         SetFighterStatus();
+        //SetFighterStatusTest(characterSelection.playerTest); ;
     }
     
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         SetFighterStatus();
+        //SetFighterStatusTest(characterSelection.playerTest);
     }
-    
+
+    /*
+    public void SetFighterStatusTest(GameObject playerSelected)
+    {
+        GameObject player1 = playerSelected;
+        FighterStatus currentP1FighterStatus = player1.GetComponent<FighterStatus>();
+        fighterStatus.Add(currentP1FighterStatus);
+        currentP1FighterStatus.WhatPlayer(1);
+
+        GameObject player2 = GameObject.FindGameObjectWithTag("Player2");
+        FighterStatus currentP2FighterStatus = player2.GetComponent<FighterStatus>();
+        fighterStatus.Add(currentP2FighterStatus);
+    }
+    */
+
     public void SetFighterStatus()
     {
         GameObject player1 = GameObject.FindGameObjectWithTag("Player1");

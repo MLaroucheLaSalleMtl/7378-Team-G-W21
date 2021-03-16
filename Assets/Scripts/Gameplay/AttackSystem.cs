@@ -12,12 +12,11 @@ public class AttackSystem : MonoBehaviour
 
     private void LaunchAttackOne() 
     {
-        damage = 20f;
+        damage = gameObject.GetComponent<FighterStatus>().punchDamage;
 
         var cols = Physics.OverlapBox(colliders[0].bounds.center, colliders[0].bounds.extents, colliders[0].transform.rotation, LayerMask.GetMask("Hurtbox"));
         foreach (Collider c in cols)
         {
-
             if (c.transform.root == transform) //used to check if i'm hitting myself 
             {
                 continue;
@@ -39,7 +38,7 @@ public class AttackSystem : MonoBehaviour
 
     private void LaunchAttackTwo()
     {
-        damage = 25f;
+        damage = gameObject.GetComponent<FighterStatus>().kickDamage;
 
         var cols = Physics.OverlapBox(colliders[1].bounds.center, colliders[1].bounds.extents, colliders[1].transform.rotation, LayerMask.GetMask("Hurtbox"));
         foreach (Collider c in cols)
@@ -60,26 +59,32 @@ public class AttackSystem : MonoBehaviour
             //gameObject -> attacking //otherPlayer -> being attacked
 
             otherPlayer.GetComponent<FighterStatus>().ReceiveDamage(damage);
-
         }
     }
-
-    public Collider HitLocation(Collider hurtBox)
+    
+    private void LaunchSpecialAttack()
     {
-        if(hurtBox.gameObject.name == "Head_HurtBox")
+        damage = gameObject.GetComponent<FighterStatus>().specialDamage;
+
+        var cols = Physics.OverlapBox(colliders[1].bounds.center, colliders[1].bounds.extents, colliders[1].transform.rotation, LayerMask.GetMask("Hurtbox"));
+        foreach (Collider c in cols)
         {
-            Debug.Log(hurtBox.name);
-            return hurtBox;
-        }
-        else if (hurtBox.gameObject.name == "Torso_HurtBox")
-        {
-            Debug.Log(hurtBox.name);
-            return hurtBox;
-        }
-        else
-        {
-            Debug.Log(hurtBox.name);
-            return hurtBox;
+            if (c.transform.root == transform) //used to check if i'm hitting myself 
+            {
+                continue;
+            }
+
+            if (c.transform.root.CompareTag("Player2"))  //it works when the scrip is attached to player1, so otherPlayer is Player2
+            {
+                Debug.Log(c.transform.root.name);
+                otherPlayer = c.transform.root.gameObject;
+            }
+
+            Debug.Log(c.name);
+
+            //gameObject -> attacking //otherPlayer -> being attacked
+
+            otherPlayer.GetComponent<FighterStatus>().ReceiveDamage(damage);
         }
     }
 }

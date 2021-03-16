@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657785, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -249,101 +249,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 73361691}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &104183005
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 104183006}
-  - component: {fileID: 104183009}
-  - component: {fileID: 104183008}
-  - component: {fileID: 104183007}
-  m_Layer: 8
-  m_Name: ProximityBox
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &104183006
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 104183005}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.302, y: 0.12800002, z: 0}
-  m_LocalScale: {x: 3.402111, y: 0.3367603, z: 0.3622548}
-  m_Children: []
-  m_Father: {fileID: 1974606574}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &104183007
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 104183005}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &104183008
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 104183005}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: f5076d50efb656545b2fafdfa7601e49, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &104183009
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 104183005}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &159456538
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,7 +437,7 @@ Transform:
   - {fileID: 1086119492}
   - {fileID: 748848063}
   m_Father: {fileID: 1974606574}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &193260752
 GameObject:
@@ -1067,8 +972,9 @@ MonoBehaviour:
   healthBar: {fileID: 1047437624}
   ratioText: {fileID: 1099458040}
   health: 100
-  punchDamage: 20
-  kickDamage: 0
+  punchDamage: 10
+  kickDamage: 15
+  specialDamage: 0
 --- !u!114 &287391523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1082,7 +988,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 287391520}
-  characterNumber: 0
+  characterNumber: 1
 --- !u!1 &320537080
 GameObject:
   m_ObjectHideFlags: 0
@@ -1114,7 +1020,7 @@ Transform:
   - {fileID: 73361692}
   - {fileID: 550006871}
   m_Father: {fileID: 1974606574}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &335558950
 GameObject:
@@ -1319,8 +1225,8 @@ GameObject:
   - component: {fileID: 362470116}
   - component: {fileID: 362470115}
   m_Layer: 5
-  m_Name: Text
-  m_TagString: Untagged
+  m_Name: RatioTextOne
+  m_TagString: RatioTextP1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2870,7 +2776,7 @@ GameObject:
   - component: {fileID: 934426585}
   - component: {fileID: 934426584}
   m_Layer: 5
-  m_Name: HealthBarOne
+  m_Name: HealthOne
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3174,7 +3080,7 @@ Transform:
   m_LocalScale: {x: 0.81828004, y: 2.1773517, z: 0.81828004}
   m_Children: []
   m_Father: {fileID: 1974606574}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1019121882
 BoxCollider:
@@ -3281,8 +3187,8 @@ GameObject:
   - component: {fileID: 1047437625}
   - component: {fileID: 1047437624}
   m_Layer: 5
-  m_Name: HealthBartwo
-  m_TagString: Untagged
+  m_Name: HealthBarTwo
+  m_TagString: HealthBarP2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3482,8 +3388,8 @@ GameObject:
   - component: {fileID: 1099458041}
   - component: {fileID: 1099458040}
   m_Layer: 5
-  m_Name: Text
-  m_TagString: Untagged
+  m_Name: RatioTextTwo
+  m_TagString: RatioTextP2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3888,6 +3794,7 @@ GameObject:
   - component: {fileID: 1224214856}
   - component: {fileID: 1224214855}
   - component: {fileID: 1224214857}
+  - component: {fileID: 1224214858}
   m_Layer: 0
   m_Name: InputManager
   m_TagString: Untagged
@@ -4025,7 +3932,19 @@ MonoBehaviour:
     m_ActionId: 66793635-1dce-4bd8-9838-fc7d72b1277a
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 424232173}
+        m_TargetAssemblyTypeName: MyCharacterController, Assembly-CSharp
+        m_MethodName: OnSpecial0Attack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 047c827e-c240-4126-82d3-a8361e73a610
     m_ActionName: Player/New action
   - m_PersistentCalls:
@@ -4076,6 +3995,49 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 933582972}
+--- !u!114 &1224214858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1224214854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 621567455fd1c4ceb811cc8a00b6a1a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NotificationBehavior: 0
+  m_MaxPlayerCount: -1
+  m_AllowJoining: 1
+  m_JoinBehavior: 0
+  m_PlayerJoinedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_PlayerLeftEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_JoinAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: 
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+    m_Reference: {fileID: 0}
+  m_PlayerPrefab: {fileID: 0}
+  m_SplitScreen: 0
+  m_MaintainAspectRatioInSplitScreen: 0
+  m_FixedNumberOfSplitScreens: -1
+  m_SplitScreenRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
 --- !u!1 &1250610710
 GameObject:
   m_ObjectHideFlags: 0
@@ -5229,7 +5191,7 @@ GameObject:
   - component: {fileID: 1829103175}
   - component: {fileID: 1829103174}
   m_Layer: 5
-  m_Name: HealthBarTwo
+  m_Name: HealthTwo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5769,7 +5731,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 104183006}
   - {fileID: 1019121881}
   - {fileID: 192822741}
   - {fileID: 320537081}
@@ -5789,7 +5750,7 @@ GameObject:
   - component: {fileID: 2017157056}
   m_Layer: 5
   m_Name: HealthBarOne
-  m_TagString: Untagged
+  m_TagString: HealthBarP1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5923,6 +5884,10 @@ PrefabInstance:
     - target: {fileID: 1764898993284670466, guid: 4ac4806a8d1dc834e9ed6e7ec867780c, type: 3}
       propertyPath: m_Name
       value: Character_Male_V1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1764898993284670466, guid: 4ac4806a8d1dc834e9ed6e7ec867780c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1764898993284670468, guid: 4ac4806a8d1dc834e9ed6e7ec867780c, type: 3}
       propertyPath: healthBar

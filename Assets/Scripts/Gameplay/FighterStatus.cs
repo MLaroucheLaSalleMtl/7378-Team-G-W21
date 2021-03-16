@@ -14,17 +14,36 @@ public class FighterStatus : MonoBehaviour
     [Header("UI")]
     public Image healthBar;
     public Text ratioText;
+    //[SerializeField] private Image healthBar;
+    //[SerializeField] private Text ratioText;
 
     [Header("Stats")]
     public float health;
     public float punchDamage;
     public float kickDamage;
+    public float specialDamage;
 
     private void Awake()
     {
         GameManager = GameObject.Find("GameManager");
         health = 100.0f;
     }
+
+    /*
+    public void WhatPlayer(int player)
+    {
+        if (player == 1)
+        {
+            healthBar = GameObject.Find("HealthBarOne").GetComponent<Image>();
+            ratioText = GameObject.Find("RatioTextOne").GetComponent<Text>();
+        }
+        else
+        {
+            healthBar = GameObject.Find("HealthBarOne").GetComponent<Image>();
+            ratioText = GameObject.Find("RatioTextOne").GetComponent<Text>();
+        }
+    }
+    */
 
     public void ReceiveDamage(float damage)
     {
@@ -58,5 +77,4 @@ public class FighterStatus : MonoBehaviour
     {
         return dead;
     }
-
 }

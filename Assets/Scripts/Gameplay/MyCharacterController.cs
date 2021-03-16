@@ -18,6 +18,8 @@ public class MyCharacterController : MonoBehaviour
     private bool inputJump = false;
     private bool inputAttackOne = false;
     private bool inputAttackTwo = false;
+    private bool inputSpecial0Attack = false;
+    //private bool inputSpecial1Attack = false;
     private bool isFrozen = false;
     public bool isBlocking = false;
 
@@ -56,13 +58,20 @@ public class MyCharacterController : MonoBehaviour
         }
         inputAttackTwo = context.performed;
     }
-    public void OnBlocking(InputAction.CallbackContext context) // K or RB
+
+    public void OnSpecial0Attack(InputAction.CallbackContext context) // O or Left Shoulder
     {
         if (isFrozen)
         {
             return;
         }
+        inputSpecial0Attack = context.performed;
+    }
+
+    public void OnBlocking(InputAction.CallbackContext context) // K or Right Shoulder
+    {
         isBlocking = context.performed;
+        gameObject.GetComponent<FighterAnimation>().BlockAnimation(isBlocking);
     }
 
     void Start()
@@ -85,18 +94,19 @@ public class MyCharacterController : MonoBehaviour
             gameObject.GetComponent<FighterAnimation>().PunchAnimation();
             inputAttackOne = false;
         }
+
         if (inputAttackTwo)
         {
             gameObject.GetComponent<FighterAnimation>().KickAnimation();
             inputAttackTwo = false;
         }
 
-
-        if (isBlocking)
+        if (inputSpecial0Attack)
         {
-            gameObject.GetComponent<FighterAnimation>().BlockAnimation();
+            gameObject.GetComponent<FighterAnimation>().SpecialAnimation();
+            inputSpecial0Attack = false;
         }
-            
+
         if (controller.isGrounded)
         {
             verticalVelocity = -1;
@@ -130,12 +140,6 @@ public class MyCharacterController : MonoBehaviour
     {
         isFrozen = false;
     }
-
-    public void StopBlocking()
-    {
-        gameObject.GetComponent<FighterAnimation>().StopTheBlock();
-    }
-
 }
 
 

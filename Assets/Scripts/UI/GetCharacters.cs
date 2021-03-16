@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class GetCharacters : MonoBehaviour
 {
-
     public GameObject[] Characters;
 
     public GameObject Place;
 
-    // Start is called before the first frame update
     void Start()
     {
         if (PlayerPrefs.GetInt("Characters") == 0)
@@ -24,11 +22,5 @@ public class GetCharacters : MonoBehaviour
         {
             GameObject obj = Instantiate(Characters[2], Place.transform.position, Quaternion.identity);
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
