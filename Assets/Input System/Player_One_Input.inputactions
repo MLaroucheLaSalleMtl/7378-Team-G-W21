@@ -200,7 +200,7 @@
                 },
                 {
                     "name": "",
-                    "id": "7ec06abf-28e5-4bb3-8348-2e4574165d7c",
+                    "id": "f810a56a-f716-47e0-9de9-71019fd97a7e",
                     "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
@@ -211,22 +211,22 @@
                 },
                 {
                     "name": "",
-                    "id": "2385b136-9721-4bf2-8b3d-716e5f363926",
-                    "path": "<Gamepad>/buttonNorth",
+                    "id": "36ff6fa3-ac79-4df5-8e30-68897de647bc",
+                    "path": "<Keyboard>/i",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad",
+                    "groups": "Keyboard&Mouse",
                     "action": "Attack 2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "36ff6fa3-ac79-4df5-8e30-68897de647bc",
-                    "path": "<Keyboard>/i",
+                    "id": "7b5b288d-c9c9-4c4f-932e-abd90a7d3ffb",
+                    "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse",
+                    "groups": "Gamepad",
                     "action": "Attack 2",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -266,7 +266,7 @@
                 },
                 {
                     "name": "",
-                    "id": "8f6864bf-242d-4dfb-8248-4d7677eeecaf",
+                    "id": "2f4fd018-4f12-47e1-a1e5-30bf69c31018",
                     "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
@@ -288,7 +288,7 @@
                 },
                 {
                     "name": "",
-                    "id": "d97eb7da-6589-4815-b071-26e329327bca",
+                    "id": "3854d13f-9dd8-4059-b368-7142a170bdd3",
                     "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",

@@ -7,7 +7,6 @@ public class AttackSystem : MonoBehaviour
     public Collider[] colliders;
 
     private GameObject otherPlayer;
-
     private float damage = 0;
 
     private void LaunchAttackOne() 
@@ -22,7 +21,7 @@ public class AttackSystem : MonoBehaviour
                 continue;
             }
 
-            if (c.transform.root.CompareTag("Player2"))  //it works when the scrip is attached to player1, so otherPlayer is Player2
+            if (c.transform.root.CompareTag("Player1") || c.transform.root.CompareTag("Player2"))  //it works when the scrip is attached to player1, so otherPlayer is Player2
             {
                 Debug.Log(c.transform.root.name);
                 otherPlayer = c.transform.root.gameObject;
@@ -48,7 +47,7 @@ public class AttackSystem : MonoBehaviour
                 continue;
             }
 
-            if (c.transform.root.CompareTag("Player2"))  //it works when the scrip is attached to player1, so otherPlayer is Player2
+            if (c.transform.root.CompareTag("Player1") || c.transform.root.CompareTag("Player2"))  //it works when the scrip is attached to player1, so otherPlayer is Player2
             {
                 Debug.Log(c.transform.root.name);
                 otherPlayer = c.transform.root.gameObject;
@@ -74,7 +73,7 @@ public class AttackSystem : MonoBehaviour
                 continue;
             }
 
-            if (c.transform.root.CompareTag("Player2"))  //it works when the scrip is attached to player1, so otherPlayer is Player2
+            if (c.transform.root.CompareTag("Player1") || c.transform.root.CompareTag("Player2"))  //it works when the scrip is attached to player1, so otherPlayer is Player2
             {
                 Debug.Log(c.transform.root.name);
                 otherPlayer = c.transform.root.gameObject;

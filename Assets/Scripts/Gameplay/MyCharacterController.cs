@@ -16,61 +16,60 @@ public class MyCharacterController : MonoBehaviour
     //Input system 
     public float inputHor, inputVer = 0f;
     private bool inputJump = false;
-    private bool inputAttackOne = false;
-    private bool inputAttackTwo = false;
-    private bool inputSpecial0Attack = false;
-    //private bool inputSpecial1Attack = false;
-    private bool isFrozen = false;
+    private bool inputPunch = false;
+    private bool inputKick = false;
+    private bool inputSpecialAttack = false;
+    [SerializeField] private bool isFrozen = false;
+    [SerializeField] private float inputTimer = 0.5f;
     public bool isBlocking = false;
 
     // Input methods
-    public void OnMove(InputAction.CallbackContext context) // WSAD or left stick
+    public void SetMove(Vector2 move)
     {
         if (isFrozen)
         {
             return;
         }
-        Vector2 v = context.ReadValue<Vector2>();
-        inputHor = v.x;
-        inputVer = v.y;
-    }
-    public void OnJump(InputAction.CallbackContext context) // spacekey or south button
-    {
-        if (isFrozen)
-        {
-            return;
-        }
-        inputJump = context.performed;
-    }
-    public void OnAttackOne(InputAction.CallbackContext context) // U or west button
-    {
-        if (isFrozen)
-        {
-            return;
-        }
-        inputAttackOne = context.performed;
-    }
-    public void OnAttackTwo(InputAction.CallbackContext context) // I or north button
-    {
-        if (isFrozen)
-        {
-            return;
-        }
-        inputAttackTwo = context.performed;
+        inputHor = move.x;
+        inputVer = move.y;
     }
 
-    public void OnSpecial0Attack(InputAction.CallbackContext context) // O or Left Shoulder
+    public void SetJump(bool jump)
+    {
+        inputJump = jump;
+    }
+
+    public void SetPunch(bool punch)
     {
         if (isFrozen)
         {
             return;
         }
-        inputSpecial0Attack = context.performed;
+        inputPunch = punch;
     }
 
-    public void OnBlocking(InputAction.CallbackContext context) // K or Right Shoulder
+    public void SetKick(bool kick)
     {
-        isBlocking = context.performed;
+        if (isFrozen)
+        {
+            return;
+        }
+
+        inputKick = kick;
+    }
+
+    public void SetSpecialAttack(bool specialAttack)
+    {
+        inputSpecialAttack = specialAttack;
+    }
+
+    public void SetBlocking(bool blocking)
+    {
+        if (isFrozen)
+        {
+            return;
+        }
+        isBlocking = blocking;
         gameObject.GetComponent<FighterAnimation>().BlockAnimation(isBlocking);
     }
 
@@ -87,24 +86,28 @@ public class MyCharacterController : MonoBehaviour
         anim.SetFloat("Ver", moveVector.y);
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        if (inputAttackOne)
+        if (inputPunch)
         {
+            inputTimer = 0.8f;
+            StartCoroutine(AnimationRoutine(inputTimer));
             gameObject.GetComponent<FighterAnimation>().PunchAnimation();
-            inputAttackOne = false;
+            inputPunch = false;
         }
 
-        if (inputAttackTwo)
+        if (inputKick)
         {
+            inputTimer = 1.5f;
+            StartCoroutine(AnimationRoutine(inputTimer));
             gameObject.GetComponent<FighterAnimation>().KickAnimation();
-            inputAttackTwo = false;
+            inputKick = false;
         }
 
-        if (inputSpecial0Attack)
+        if (inputSpecialAttack)
         {
             gameObject.GetComponent<FighterAnimation>().SpecialAnimation();
-            inputSpecial0Attack = false;
+            inputSpecialAttack = false;
         }
 
         if (controller.isGrounded)
@@ -129,17 +132,35 @@ public class MyCharacterController : MonoBehaviour
         Animate();
     }
 
-    public void FreezePlayerControl()
+    //public void FreezePlayerControl()
+    //{
+    //    isFrozen = true;
+    ////inputHor = 0;
+    ////    inputVer = 0;
+    //}
+
+    //public void UnFreezePlayerControl()
+    //{
+    //    isFrozen = false;
+    //}
+
+    private IEnumerator AnimationRoutine(float freezeTime)
     {
+        float time = freezeTime;
         isFrozen = true;
         inputHor = 0;
         inputVer = 0;
+
+        while (time >= 0)
+        {
+            time -= Time.deltaTime;
+            yield return null;
+        }
+
+        isFrozen = false;
+        yield break;
     }
 
-    public void UnFreezePlayerControl()
-    {
-        isFrozen = false;
-    }
 }
 
 

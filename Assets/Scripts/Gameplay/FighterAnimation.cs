@@ -5,7 +5,6 @@ using UnityEngine;
 public class FighterAnimation : MonoBehaviour
 {
     [SerializeField] private Animator animator;
-
     [SerializeField] private int characterNumber;
 
     public void DeadAnimation()
@@ -15,6 +14,7 @@ public class FighterAnimation : MonoBehaviour
 
     public void PunchAnimation()
     {
+
         animator.SetTrigger("AttackOne");
     }
 

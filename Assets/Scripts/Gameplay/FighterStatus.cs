@@ -5,17 +5,8 @@ using UnityEngine.UI;
 
 public class FighterStatus : MonoBehaviour
 {
-    private GameObject GameManager;
-
+    GameManager manager;
     private bool dead = false;
-
-    private bool inBlock = false;
-
-    [Header("UI")]
-    public Image healthBar;
-    public Text ratioText;
-    //[SerializeField] private Image healthBar;
-    //[SerializeField] private Text ratioText;
 
     [Header("Stats")]
     public float health;
@@ -25,25 +16,9 @@ public class FighterStatus : MonoBehaviour
 
     private void Awake()
     {
-        GameManager = GameObject.Find("GameManager");
+        manager = GameManager.instance;
         health = 100.0f;
     }
-
-    /*
-    public void WhatPlayer(int player)
-    {
-        if (player == 1)
-        {
-            healthBar = GameObject.Find("HealthBarOne").GetComponent<Image>();
-            ratioText = GameObject.Find("RatioTextOne").GetComponent<Text>();
-        }
-        else
-        {
-            healthBar = GameObject.Find("HealthBarOne").GetComponent<Image>();
-            ratioText = GameObject.Find("RatioTextOne").GetComponent<Text>();
-        }
-    }
-    */
 
     public void ReceiveDamage(float damage)
     {
@@ -54,10 +29,7 @@ public class FighterStatus : MonoBehaviour
         else
         {
             health -= damage;
-            HealthBarUpdate();
             gameObject.GetComponent<FighterAnimation>().TorsoHitAnimation();
-
-            HealthBarUpdate();
 
             if (health <= 0)
             {
@@ -65,12 +37,6 @@ public class FighterStatus : MonoBehaviour
                 gameObject.GetComponent<FighterAnimation>().DeadAnimation();
             }
         }
-    }
-
-    public void HealthBarUpdate()
-    {
-        healthBar.fillAmount = health / 100;
-        ratioText.text = (health).ToString("0");
     }
 
     public bool GetDead()
