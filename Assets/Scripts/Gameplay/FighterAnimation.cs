@@ -45,13 +45,15 @@ public class FighterAnimation : MonoBehaviour
 
     public void SpecialAnimation()
     {
-        switch (characterNumber)
+        switch (gameObject.GetComponent<FighterStatus>().playerID)
         {
             case 0:
                 animator.SetTrigger("SpecialAttack0");
                 break;
             case 1:
                 animator.SetTrigger("SpecialAttack1");
+                break;
+            case 2:
                 break;
             default:
                 break;

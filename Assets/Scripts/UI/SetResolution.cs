@@ -36,8 +36,13 @@ public class SetResolution : MonoBehaviour
 
     public void SetRes()
     {
-        //Resolution res = resolutions[dropdown.value];
-        //Screen.SetResolution(res.width, res.height, Screen.fullScreenMode, res.refreshRate);
+        if (dropdown == null)
+        {
+            return;
+        }
+
+        Resolution res = resolutions[dropdown.value];
+        Screen.SetResolution(res.width, res.height, Screen.fullScreenMode, res.refreshRate);
     }
 
 }

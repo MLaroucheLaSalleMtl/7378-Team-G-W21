@@ -60,9 +60,4 @@ public class PlayerHandler : MonoBehaviour
         isBlocking = context.performed;
         player.SetBlocking(isBlocking);
     }
-
-
-
-
-
 }

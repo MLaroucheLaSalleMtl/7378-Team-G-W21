@@ -9,6 +9,7 @@ public class FighterStatus : MonoBehaviour
     private bool dead = false;
 
     [Header("Stats")]
+    public int playerID;
     public float health;
     public float punchDamage;
     public float kickDamage;

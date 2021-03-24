@@ -46,4 +46,9 @@ public class LoadScene : MonoBehaviour
     {
         SceneManager.LoadScene(GetLevelIndex());
     }
+
+    public void LoadAnyScene(string scene)
+    {
+        SceneManager.LoadScene(scene);
+    }
 }

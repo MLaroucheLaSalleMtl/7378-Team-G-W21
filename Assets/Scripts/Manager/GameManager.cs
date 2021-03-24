@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Input Manager")]
     [SerializeField] private MyCharacterController[] playerList;
-    private int playerCount = 0;
+    [SerializeField] private int playerCount = 0;
 
     [Header("User Interface")]
     public float timeCounter = 0f;
@@ -18,28 +18,24 @@ public class GameManager : MonoBehaviour
     public Text[] ratioText;
 
     [Header("Player Manager")]
-    [SerializeField] private GameObject[] charactersArray;
-    public GameObject[] charactersSelected;
-    private List<FighterStatus> fighterStatus = new List<FighterStatus>();
-    private FighterStatus[] playerFighterStatus;
-    private CharacterSelection characterSelection;
-    private Vector3 spawnPositionP1 = new Vector3(2.56f, 0.07f, -5.76f);
-    private Vector3 spawnPositionP2 = new Vector3(-2.56f, 0.07f, -5.76f);
-    private Vector3 spawnRotationP1 = new Vector3(0, 0, 0);
-    private Vector3 spawnRotationP2 = new Vector3(0, 0, 0);
+    [SerializeField] private CharacterSelection characterSelection;
+    [SerializeField] private List<GameObject> charactersSelected = new List<GameObject>();
+    [SerializeField] private List<FighterStatus> fighterStatus = new List<FighterStatus>();
+    [SerializeField] private Vector3 spawnPositionP1 = new Vector3(2.56f, 0.07f, -5.76f);
+    [SerializeField] private Vector3 spawnPositionP2 = new Vector3(-2.56f, 0.07f, -5.76f);
 
     //Stage Manager
 
     //Match Manager
-    private string playModeSelected;
+    [SerializeField] private string playModeSelected;
     public int roundCounterP1Int { get; set; }
     public int roundCounterP2Int { get; set; }
     public bool roundIsEnded = false;
     public bool matchFullyEnded { get; set; } = false;
 
-
     public MyCharacterController GetPlayer()
     {
+        /*
         if(playerList.Length > playerCount)
         {
             MyCharacterController pl = playerList[playerCount];
@@ -50,6 +46,77 @@ public class GameManager : MonoBehaviour
         {
             return null;
         }
+        */
+
+        if (playerList.Length > playerCount)
+        {
+            if(playerCount == 0)
+            {
+                if(charactersSelected[0].GetComponent<FighterStatus>().playerID == 0)
+                {
+                    MyCharacterController pl = playerList[0];
+                    Debug.Log("BP1");
+                    playerCount++;
+                    return pl;
+                }
+                if (charactersSelected[0].GetComponent<FighterStatus>().playerID == 1)
+                {
+                    MyCharacterController pl = playerList[1];
+                    Debug.Log("RP1");
+                    playerCount++;
+                    return pl;
+                }
+                if (charactersSelected[0].GetComponent<FighterStatus>().playerID == 2)
+                {
+                    MyCharacterController pl = playerList[2];
+                    Debug.Log("FP1");
+                    playerCount++;
+                    return pl;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else if(playerCount == 1)
+            {
+                if (charactersSelected[1].GetComponent<FighterStatus>().playerID == 0)
+                {
+                    MyCharacterController pl = playerList[3];
+                    Debug.Log("BP2");
+                    playerCount++;
+                    return pl;
+                }
+                if (charactersSelected[1].GetComponent<FighterStatus>().playerID == 1)
+                {
+                    MyCharacterController pl = playerList[4];
+                    Debug.Log("RP2");
+                    playerCount++;
+                    return pl;
+                }
+                if (charactersSelected[1].GetComponent<FighterStatus>().playerID == 2)
+                {
+                    MyCharacterController pl = playerList[5];
+                    Debug.Log("FP2");
+                    playerCount++;
+                    return pl;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        else
+        {
+            return null;
+        }
+
     }
 
     private void Awake()
@@ -63,56 +130,80 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        characterSelection = CharacterSelection.instance;
+
+        SetPlayers();
     }
 
     void Start()
     {
+        /*
+        characterSelection = CharacterSelection.instance;
+
+        SetPlayers();
+        */
+        SetPlayMode();
+        InstantiatePlayers();
         SetFighterStatus();
     }
     
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        SetPlayers();
+        SetPlayMode();
+        InstantiatePlayers();
         SetFighterStatus();
     }
 
-    public void SetFighterStatus()
+    public void SetPlayers()
     {
-        for (int i = 0; i < charactersSelected.Length; i++)
-        {
-            playerFighterStatus[i] = charactersSelected[i].GetComponent<FighterStatus>();
-            fighterStatus.Add(playerFighterStatus[i]);
-        }
+        charactersSelected = characterSelection.GetCharacters().GetClone();
+    }
 
-        /*
-        GameObject player1 = GameObject.FindGameObjectWithTag("Player1");
-        FighterStatus currentP1FighterStatus = player1.GetComponent<FighterStatus>();
-        fighterStatus.Add(currentP1FighterStatus);
-
-        GameObject player2 = GameObject.FindGameObjectWithTag("Player2");
-        FighterStatus currentP2FighterStatus = player2.GetComponent<FighterStatus>();
-        fighterStatus.Add(currentP2FighterStatus);
-        */
+    public void SetPlayMode()
+    {
+        playModeSelected = characterSelection.GetPlayMode();
     }
 
     public void InstantiatePlayers()
     {
-        switch (characterSelection.GetPlayMode())
+        switch (playModeSelected)
         {
-
+            case "2P":
+                Instantiate(charactersSelected[0], spawnPositionP1, Quaternion.identity);
+                Instantiate(charactersSelected[1], spawnPositionP2, Quaternion.identity);
+                break;
+            case "1P":
+                Instantiate(charactersSelected[0], spawnPositionP1, Quaternion.identity);
+                break;
+            default:
+                break;
         }
     }
 
-    public void SetUI(GameObject[] charactersSelected)
+    public void SetFighterStatus()
     {
-
+        switch (playModeSelected)
+        {
+            case "2P":
+                fighterStatus.Add(charactersSelected[0].GetComponent<FighterStatus>());
+                fighterStatus.Add(charactersSelected[1].GetComponent<FighterStatus>());
+                break;
+            case "1P":
+                fighterStatus.Add(charactersSelected[0].GetComponent<FighterStatus>());
+                break;
+            default:
+                break;
+        }
     }
 
     public void UIUpdate()
     {
-        for(int i = 0; i < charactersSelected.Length; i++)
+        for(int i = 0; i < charactersSelected.Count; i++)
         {
             healthBar[i].fillAmount = charactersSelected[i].GetComponent<FighterStatus>().health / 100;
-            ratioText[i].text = (charactersSelected[i].GetComponent<FighterStatus>().health).ToString("0");
+            ratioText[i].text = charactersSelected[i].GetComponent<FighterStatus>().health.ToString("0");
         }
     }
 
@@ -177,5 +268,13 @@ public class GameManager : MonoBehaviour
         #else
             Application.Quit();
         #endif
+    }
+}
+
+public static class Extentions
+{
+   public static List<T> GetClone<T>(this List<T> source)
+    {
+        return source.GetRange(0, source.Count);
     }
 }

@@ -5,50 +5,56 @@ using UnityEngine.SceneManagement;
 
 public class CharacterSelection : MonoBehaviour
 {
+    public static CharacterSelection instance = null;
+
     private string playModeSelected;
-    public GameObject[] charactersList;
-    public Vector3 playerSpawnPosition = new Vector3(2.56f, 0.07f, -5.76f);
-    public GameObject playerTest;
+    public GameObject[] charactersLeftList;
+    public GameObject[] charactersRightList;
     public List<GameObject> charactersSelected = new List<GameObject>();
 
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject.transform);
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject.transform);
+        }
+        else if(instance != this)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void OnCharacterSelection(int charSelected)
     {
-        /*
-        playerTest = charactersList[charSelected];
-        GameObject player = Instantiate(charactersList[charSelected], playerSpawnPosition, Quaternion.identity);
-        DontDestroyOnLoad(player);
-        LoadScene.instance.LoadNextLevel();
-        */
-
         switch (playModeSelected)
         {
             case "Tutorial":
-                if(charactersSelected.Count < 1)
+                if(charactersSelected.Count == 0)
                 {
-                    charactersSelected.Add(charactersList[charSelected]);
+                    charactersSelected.Add(charactersLeftList[charSelected]);
                 }
                 break;
             case "Training":
-                if (charactersSelected.Count < 1)
+                if (charactersSelected.Count == 0)
                 {
-                    charactersSelected.Add(charactersList[charSelected]);
+                    charactersSelected.Add(charactersLeftList[charSelected]);
                 }
                 break;
             case "2P":
-                if (charactersSelected.Count < 2)
+                if (charactersSelected.Count == 0)
                 {
-                    charactersSelected.Add(charactersList[charSelected]);
+                    charactersSelected.Add(charactersLeftList[charSelected]);
+                }
+                else if (charactersSelected.Count == 1)
+                {
+                    charactersSelected.Add(charactersRightList[charSelected]);
                 }
                 break;
             case "1P":
-                if (charactersSelected.Count < 1)
+                if (charactersSelected.Count == 0)
                 {
-                    charactersSelected.Add(charactersList[charSelected]);
+                    charactersSelected.Add(charactersLeftList[charSelected]);
                 }
                 break;
             default:
@@ -58,6 +64,7 @@ public class CharacterSelection : MonoBehaviour
 
     public void OnPlayMode(string playMode)
     {
+        ClearCharacterSelection();
         playModeSelected = playMode;
     }
 
@@ -74,5 +81,10 @@ public class CharacterSelection : MonoBehaviour
     public void ClearCharacterSelection()
     {
         charactersSelected.Clear();
+    }
+
+    public void OnPlayModeSelection()
+    {
+        LoadScene.instance.LoadAnyScene(playModeSelected);
     }
 }
