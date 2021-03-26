@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
 
     [Header("Input Manager")]
-    [SerializeField] private MyCharacterController[] playerList;
     [SerializeField] private int playerCount = 0;
 
     [Header("User Interface")]
@@ -23,6 +22,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<FighterStatus> fighterStatus = new List<FighterStatus>();
     [SerializeField] private Vector3 spawnPositionP1 = new Vector3(2.56f, 0.07f, -5.76f);
     [SerializeField] private Vector3 spawnPositionP2 = new Vector3(-2.56f, 0.07f, -5.76f);
+    [SerializeField] private GameObject player1 = null;
+    [SerializeField] private GameObject player2 = null;
 
     //Stage Manager
 
@@ -35,76 +36,19 @@ public class GameManager : MonoBehaviour
 
     public MyCharacterController GetPlayer()
     {
-        /*
-        if(playerList.Length > playerCount)
+        if (charactersSelected.Count > playerCount)
         {
-            MyCharacterController pl = playerList[playerCount];
-            playerCount++;
-            return pl;
-        }
-        else
-        {
-            return null;
-        }
-        */
-
-        if (playerList.Length > playerCount)
-        {
-            if(playerCount == 0)
+            if (playerCount == 0)
             {
-                if(charactersSelected[0].GetComponent<FighterStatus>().playerID == 0)
-                {
-                    MyCharacterController pl = playerList[0];
-                    Debug.Log("BP1");
-                    playerCount++;
-                    return pl;
-                }
-                if (charactersSelected[0].GetComponent<FighterStatus>().playerID == 1)
-                {
-                    MyCharacterController pl = playerList[1];
-                    Debug.Log("RP1");
-                    playerCount++;
-                    return pl;
-                }
-                if (charactersSelected[0].GetComponent<FighterStatus>().playerID == 2)
-                {
-                    MyCharacterController pl = playerList[2];
-                    Debug.Log("FP1");
-                    playerCount++;
-                    return pl;
-                }
-                else
-                {
-                    return null;
-                }
+                MyCharacterController pl = player1.GetComponent<MyCharacterController>();
+                playerCount++;
+                return pl;
             }
-            else if(playerCount == 1)
+            else if (playerCount == 1)
             {
-                if (charactersSelected[1].GetComponent<FighterStatus>().playerID == 0)
-                {
-                    MyCharacterController pl = playerList[3];
-                    Debug.Log("BP2");
-                    playerCount++;
-                    return pl;
-                }
-                if (charactersSelected[1].GetComponent<FighterStatus>().playerID == 1)
-                {
-                    MyCharacterController pl = playerList[4];
-                    Debug.Log("RP2");
-                    playerCount++;
-                    return pl;
-                }
-                if (charactersSelected[1].GetComponent<FighterStatus>().playerID == 2)
-                {
-                    MyCharacterController pl = playerList[5];
-                    Debug.Log("FP2");
-                    playerCount++;
-                    return pl;
-                }
-                else
-                {
-                    return null;
-                }
+                MyCharacterController pl = player2.GetComponent<MyCharacterController>();
+                playerCount++;
+                return pl;
             }
             else
             {
@@ -116,7 +60,6 @@ public class GameManager : MonoBehaviour
         {
             return null;
         }
-
     }
 
     private void Awake()
@@ -130,19 +73,13 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        characterSelection = CharacterSelection.instance;
-
-        SetPlayers();
     }
 
     void Start()
     {
-        /*
         characterSelection = CharacterSelection.instance;
 
         SetPlayers();
-        */
         SetPlayMode();
         InstantiatePlayers();
         SetFighterStatus();
@@ -173,9 +110,12 @@ public class GameManager : MonoBehaviour
             case "2P":
                 Instantiate(charactersSelected[0], spawnPositionP1, Quaternion.identity);
                 Instantiate(charactersSelected[1], spawnPositionP2, Quaternion.identity);
+                player1 = GameObject.FindGameObjectWithTag("Player1");
+                player2 = GameObject.FindGameObjectWithTag("Player2");
                 break;
             case "1P":
                 Instantiate(charactersSelected[0], spawnPositionP1, Quaternion.identity);
+                player1 = GameObject.FindGameObjectWithTag("Player1");
                 break;
             default:
                 break;
@@ -187,11 +127,11 @@ public class GameManager : MonoBehaviour
         switch (playModeSelected)
         {
             case "2P":
-                fighterStatus.Add(charactersSelected[0].GetComponent<FighterStatus>());
-                fighterStatus.Add(charactersSelected[1].GetComponent<FighterStatus>());
+                fighterStatus.Add(player1.GetComponent<FighterStatus>());
+                fighterStatus.Add(player2.GetComponent<FighterStatus>());
                 break;
             case "1P":
-                fighterStatus.Add(charactersSelected[0].GetComponent<FighterStatus>());
+                fighterStatus.Add(player1.GetComponent<FighterStatus>());
                 break;
             default:
                 break;
@@ -200,10 +140,10 @@ public class GameManager : MonoBehaviour
 
     public void UIUpdate()
     {
-        for(int i = 0; i < charactersSelected.Count; i++)
+        for (int i = 0; i < fighterStatus.Count; i++)
         {
-            healthBar[i].fillAmount = charactersSelected[i].GetComponent<FighterStatus>().health / 100;
-            ratioText[i].text = charactersSelected[i].GetComponent<FighterStatus>().health.ToString("0");
+            healthBar[i].fillAmount = fighterStatus[i].health / 100;
+            ratioText[i].text = fighterStatus[i].health.ToString("0");
         }
     }
 

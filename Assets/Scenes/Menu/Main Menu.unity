@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2583,7 +2583,7 @@ GameObject:
   - component: {fileID: 492796061}
   - component: {fileID: 492796060}
   m_Layer: 5
-  m_Name: GreenChar_Btn
+  m_Name: FemChar_Btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3744,6 +3744,7 @@ MonoBehaviour:
   charactersLeftList:
   - {fileID: 1764898993284670466, guid: 4ac4806a8d1dc834e9ed6e7ec867780c, type: 3}
   - {fileID: 1764898993284670466, guid: 16ddb6e48687459408968ff1d06858c1, type: 3}
+  - {fileID: 2014604157981700662, guid: cf76773542e1ee941a6bf7926ded2c89, type: 3}
   charactersRightList:
   - {fileID: 1764898993284670466, guid: c20071e8d1e947646bcd1280a44367cb, type: 3}
   - {fileID: 1764898993284670466, guid: 5b2c8d51f4273d34e8cc89f06cf378bd, type: 3}
@@ -4403,7 +4404,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Green Char
+  m_Text: Fem Char
 --- !u!222 &1037971090
 CanvasRenderer:
   m_ObjectHideFlags: 0

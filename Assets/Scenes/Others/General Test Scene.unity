@@ -1066,6 +1066,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72f25d01e9d1a74428520ee135a05d4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerID: 0
   health: 100
   punchDamage: 20
   kickDamage: 0
@@ -3930,12 +3931,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f79e413478fa7a24fa173991fe5bbb49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerList: []
+  playerCount: 0
   timeCounter: 0
   healthBar: []
   ratioText: []
-  charactersArray: []
+  characterSelection: {fileID: 0}
   charactersSelected: []
+  fighterStatus: []
+  spawnPositionP1: {x: 2.56, y: 0.07, z: -5.76}
+  spawnPositionP2: {x: -2.56, y: 0.07, z: -5.76}
+  player1: {fileID: 0}
+  player2: {fileID: 0}
+  playModeSelected: 
   roundIsEnded: 0
 --- !u!4 &1387281740
 Transform:
@@ -5275,6 +5282,10 @@ PrefabInstance:
     - target: {fileID: 2014604157981405090, guid: cf76773542e1ee941a6bf7926ded2c89, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2014604157981700661, guid: cf76773542e1ee941a6bf7926ded2c89, type: 3}
+      propertyPath: m_Center.y
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 2014604157981700662, guid: cf76773542e1ee941a6bf7926ded2c89, type: 3}
       propertyPath: m_Name

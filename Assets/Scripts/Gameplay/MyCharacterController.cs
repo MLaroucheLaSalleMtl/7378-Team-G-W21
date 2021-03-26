@@ -106,6 +106,8 @@ public class MyCharacterController : MonoBehaviour
 
         if (inputSpecialAttack)
         {
+            inputTimer = 3f;
+            StartCoroutine(AnimationRoutine(inputTimer));
             gameObject.GetComponent<FighterAnimation>().SpecialAnimation();
             inputSpecialAttack = false;
         }
