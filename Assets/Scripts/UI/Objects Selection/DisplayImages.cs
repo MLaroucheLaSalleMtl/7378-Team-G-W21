@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class CharacterImages : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class DisplayImages : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public GameObject charImage;
 

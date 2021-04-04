@@ -11,6 +11,7 @@ public class FighterStatus : MonoBehaviour
     public bool dead = false;
     public bool hasSpecial = false;
     public int specialWeight = 1;
+    public float specialCounter = 0f;
 
     [Header("Stats")]
     public int playerID;
@@ -53,9 +54,11 @@ public class FighterStatus : MonoBehaviour
 
     public void SpecialUpdate()
     {
+        SpecialCounter();
+
         if(specialPoints < 100)
         {
-            specialPoints += manager.timeCounter / specialWeight / 120;
+            specialPoints += specialCounter / specialWeight / 120;
         }
         else
         {
@@ -64,13 +67,21 @@ public class FighterStatus : MonoBehaviour
         }
     }
 
+    public void ResetSpecialAttack()
+    {
+        specialPoints = 0;
+        hasSpecial = false;
+        specialWeight++;
+        specialCounter = 0;
+    }
+
+    public void SpecialCounter()
+    {
+        specialCounter += Time.deltaTime;
+    }
+
     public bool HasSpecial()
     {
-        if (hasSpecial)
-        {
-            specialWeight++;
-        }
-
         return hasSpecial;
     }
 

@@ -14,7 +14,6 @@ public class FighterAnimation : MonoBehaviour
 
     public void PunchAnimation()
     {
-
         animator.SetTrigger("AttackOne");
     }
 
@@ -23,19 +22,9 @@ public class FighterAnimation : MonoBehaviour
         animator.SetTrigger("AttackTwo");
     }
 
-    public void HeadHitAnimation()
-    {
-
-    }
-
     public void TorsoHitAnimation()
     {
         animator.SetTrigger("isHit");
-    }
-
-    public void JumpAnimation()
-    {
-
     }
 
     public void BlockAnimation(bool isBlocking)
@@ -54,7 +43,7 @@ public class FighterAnimation : MonoBehaviour
                 animator.SetTrigger("SpecialAttack1");
                 break;
             case 2:
-                animator.SetTrigger("SpecialAttack0");
+                animator.SetTrigger("SpecialAttack2");
                 break;
             default:
                 break;

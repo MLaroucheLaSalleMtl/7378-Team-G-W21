@@ -124,7 +124,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1764898993284670471}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &1764898993068700860
 SkinnedMeshRenderer:
@@ -295,7 +295,7 @@ Transform:
   m_Children:
   - {fileID: 1764898993073743344}
   m_Father: {fileID: 1764898993284670471}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1764898993073911828
 GameObject:
@@ -2003,6 +2003,7 @@ Transform:
   m_LocalPosition: {x: -2.56, y: 0.07, z: -5.76}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 6758311255590761349}
   - {fileID: 1764898993389691502}
   - {fileID: 1764898993073743340}
   - {fileID: 1764898993073743346}
@@ -2061,6 +2062,7 @@ MonoBehaviour:
   speed: 5
   jumpSpeed: 0.1
   fallSpeed: 14
+  pushBack: 6
   inputHor: 0
   inputVer: 0
   isBlocking: 0
@@ -2086,6 +2088,8 @@ MonoBehaviour:
   - {fileID: 1764898993554510197}
   - {fileID: 1764898994480636123}
   - {fileID: 350241038}
+  fireball: {fileID: 8849338254907735854, guid: ed36cc23ba85c114382db23ab1f7bae9, type: 3}
+  fireballSpawn: {fileID: 4615568603004636586}
 --- !u!114 &1764898993284670468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2098,8 +2102,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72f25d01e9d1a74428520ee135a05d4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dead: 0
+  hasSpecial: 0
+  specialWeight: 1
+  specialCounter: 0
   playerID: 1
   health: 100
+  specialPoints: 0
   punchDamage: 10
   kickDamage: 15
   specialDamage: 25
@@ -2148,7 +2157,7 @@ Transform:
   - {fileID: 1764898994742706656}
   - {fileID: 1764898993082760622}
   m_Father: {fileID: 1764898993284670471}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1764898993554510199
 GameObject:
@@ -2752,4 +2761,34 @@ Transform:
   - {fileID: 350241037}
   m_Father: {fileID: 1764898993389691502}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4615568603004636586
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6758311255590761349}
+  m_Layer: 0
+  m_Name: FireBallSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6758311255590761349
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4615568603004636586}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.936, y: 1.309, z: 0.163}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1764898993284670471}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

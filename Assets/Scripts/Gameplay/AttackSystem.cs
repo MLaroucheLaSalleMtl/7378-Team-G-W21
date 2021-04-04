@@ -9,6 +9,9 @@ public class AttackSystem : MonoBehaviour
     private GameObject otherPlayer;
     private float damage = 0;
 
+    [SerializeField] private GameObject fireball;
+    [SerializeField] private GameObject fireballSpawn;
+
     private void LaunchAttackOne() 
     {
         damage = gameObject.GetComponent<FighterStatus>().punchDamage;
@@ -85,5 +88,10 @@ public class AttackSystem : MonoBehaviour
 
             otherPlayer.GetComponent<FighterStatus>().ReceiveDamage(damage);
         }
+    }
+
+    private void LaunchFireball()
+    {
+        Instantiate(fireball, fireballSpawn.transform.position, Quaternion.identity);
     }
 }

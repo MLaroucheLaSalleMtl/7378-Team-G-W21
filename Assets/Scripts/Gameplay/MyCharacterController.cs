@@ -115,8 +115,7 @@ public class MyCharacterController : MonoBehaviour
             inputTimer = 3f;
             StartCoroutine(AnimationRoutine(inputTimer));
             gameObject.GetComponent<FighterAnimation>().SpecialAnimation();
-            gameObject.GetComponent<FighterStatus>().specialPoints = 0;
-            gameObject.GetComponent<FighterStatus>().hasSpecial = false;
+            gameObject.GetComponent<FighterStatus>().ResetSpecialAttack();
             inputSpecialAttack = false;
         }
 

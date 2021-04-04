@@ -14,7 +14,7 @@ public class CharacterSelection : MonoBehaviour
     public List<GameObject> charactersSelected = new List<GameObject>();
     private string playModeSelected;
 
-    [Header("Player Manager")]
+    [Header("UI Manager")]
     [SerializeField] private Image[] selectedPlayersLeftImages;
     [SerializeField] private Image[] selectedPlayersRightImages;
 
@@ -31,34 +31,34 @@ public class CharacterSelection : MonoBehaviour
         }
     }
 
-    public void OnCharacterSelection(int charSelected)
+    public void OnCharacterSelection(int charID)
     {
         switch (playModeSelected)
         {
             case "Tutorial":
                 if(charactersSelected.Count == 0)
                 {
-                    charactersSelected.Add(charactersLeftList[charSelected]);
-                    selectedPlayersLeftImages[charSelected].GetComponent<Image>().color = Color.yellow;
+                    charactersSelected.Add(charactersLeftList[charID]);
+                    selectedPlayersLeftImages[charID].GetComponent<Image>().color = Color.yellow;
                 }
                 break;
             case "Training":
                 if (charactersSelected.Count == 0)
                 {
-                    charactersSelected.Add(charactersLeftList[charSelected]);
-                    selectedPlayersLeftImages[charSelected].GetComponent<Image>().color = Color.yellow;
+                    charactersSelected.Add(charactersLeftList[charID]);
+                    selectedPlayersLeftImages[charID].GetComponent<Image>().color = Color.yellow;
                 }
                 break;
             case "2P":
                 if (charactersSelected.Count == 0)
                 {
-                    charactersSelected.Add(charactersLeftList[charSelected]);
-                    selectedPlayersLeftImages[charSelected].GetComponent<Image>().color = Color.yellow;
+                    charactersSelected.Add(charactersLeftList[charID]);
+                    selectedPlayersLeftImages[charID].GetComponent<Image>().color = Color.yellow;
                 }
                 else if (charactersSelected.Count == 1)
                 {
-                    charactersSelected.Add(charactersRightList[charSelected]);
-                    selectedPlayersRightImages[charSelected].GetComponent<Image>().color = Color.yellow;
+                    charactersSelected.Add(charactersRightList[charID]);
+                    selectedPlayersRightImages[charID].GetComponent<Image>().color = Color.yellow;
                 }
                 break;
             default:
@@ -69,6 +69,7 @@ public class CharacterSelection : MonoBehaviour
     public void OnPlayMode(string playMode)
     {
         OnClearCharacterSelection();
+        StageSelection.instance.OnClearStageSelection();
         playModeSelected = playMode;
     }
 

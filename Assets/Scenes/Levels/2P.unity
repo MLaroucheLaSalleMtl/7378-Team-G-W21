@@ -2093,7 +2093,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0
+  m_Text: 99
 --- !u!222 &1114424229
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2623,6 +2623,7 @@ MonoBehaviour:
   spawnPositionP2: {x: -2.56, y: 0.07, z: -5.76}
   player1: {fileID: 0}
   player2: {fileID: 0}
+  specialCounter: 0
   playModeSelected: 
   roundIsEnded: 0
 --- !u!4 &1387281740

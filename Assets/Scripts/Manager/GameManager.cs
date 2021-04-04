@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Text ratioTextP1 = null;
     [SerializeField] private Text ratioTextP2 = null;
     [SerializeField] private Text counterText;
-    public float timeCounter = 0f;
+    public float timeCounter = 99f;
     [SerializeField] private Image specialBarP1 = null;
     [SerializeField] private Image specialBarP2 = null;
     [SerializeField] private Text specialRatioTextP1 = null;
@@ -32,7 +32,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject player1 = null;
     [SerializeField] private GameObject player2 = null;
 
-    //Stage Manager
+    [Header("Stage Manager")]
+    [SerializeField] private StageSelection stageSelection;
+    [SerializeField] private GameObject stageSelected = null;
+    [SerializeField] private Vector3 spawnPositionStage = new Vector3(0, 0, 0);
 
     //Match Manager
     [SerializeField] private string playModeSelected;
@@ -85,15 +88,17 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         characterSelection = CharacterSelection.instance;
+        stageSelection = StageSelection.instance;
 
-        SetPlayers();
-        SetPlayMode();
-        InstantiatePlayers();
-        SetFighterStatus();
-        SetUI();
+        GetRoundReady();
     }
     
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        GetRoundReady();
+    }
+
+    public void GetRoundReady()
     {
         CounterClear();
         ClearTimer();
@@ -119,6 +124,11 @@ public class GameManager : MonoBehaviour
         charactersSelected = characterSelection.GetCharacters().GetClone();
     }
 
+    public void SetStage()
+    {
+        stageSelected = stageSelection.GetStage();
+    }
+
     public void SetPlayMode()
     {
         playModeSelected = characterSelection.GetPlayMode();
@@ -137,6 +147,11 @@ public class GameManager : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void InstantiateStage()
+    {
+        Instantiate(stageSelected, spawnPositionStage, Quaternion.identity);
     }
 
     public void SetFighterStatus()
@@ -251,18 +266,18 @@ public class GameManager : MonoBehaviour
 
     public void Timer()
     {
-        timeCounter += Time.deltaTime;
+        timeCounter -= Time.deltaTime;
         TimerDisplay();
     }
 
     public void TimerDisplay()
     {
-        counterText.text = timeCounter.ToString("F2");
+        counterText.text = timeCounter.ToString("F1");
     }
 
     public void ClearTimer()
     {
-        timeCounter = 0;
+        timeCounter = 99f;
     }
 
     public void CounterClear()
