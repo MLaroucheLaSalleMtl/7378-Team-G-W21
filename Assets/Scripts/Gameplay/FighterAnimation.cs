@@ -54,6 +54,7 @@ public class FighterAnimation : MonoBehaviour
                 animator.SetTrigger("SpecialAttack1");
                 break;
             case 2:
+                animator.SetTrigger("SpecialAttack0");
                 break;
             default:
                 break;

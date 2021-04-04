@@ -12,9 +12,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int playerCount = 0;
 
     [Header("User Interface")]
+    [SerializeField] private Image healthBarP1 = null;
+    [SerializeField] private Image healthBarP2 = null;
+    [SerializeField] private Text ratioTextP1 = null;
+    [SerializeField] private Text ratioTextP2 = null;
+    [SerializeField] private Text counterText;
     public float timeCounter = 0f;
-    public Image[] healthBar;
-    public Text[] ratioText;
+    [SerializeField] private Image specialBarP1 = null;
+    [SerializeField] private Image specialBarP2 = null;
+    [SerializeField] private Text specialRatioTextP1 = null;
+    [SerializeField] private Text specialRatioTextP2 = null;
 
     [Header("Player Manager")]
     [SerializeField] private CharacterSelection characterSelection;
@@ -83,14 +90,28 @@ public class GameManager : MonoBehaviour
         SetPlayMode();
         InstantiatePlayers();
         SetFighterStatus();
+        SetUI();
     }
     
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        CounterClear();
+        ClearTimer();
         SetPlayers();
         SetPlayMode();
         InstantiatePlayers();
         SetFighterStatus();
+        SetUI();
+    }
+
+    public void RoundSubs()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    public void RoundUnsubs()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     public void SetPlayers()
@@ -113,10 +134,6 @@ public class GameManager : MonoBehaviour
                 player1 = GameObject.FindGameObjectWithTag("Player1");
                 player2 = GameObject.FindGameObjectWithTag("Player2");
                 break;
-            case "1P":
-                Instantiate(charactersSelected[0], spawnPositionP1, Quaternion.identity);
-                player1 = GameObject.FindGameObjectWithTag("Player1");
-                break;
             default:
                 break;
         }
@@ -130,25 +147,55 @@ public class GameManager : MonoBehaviour
                 fighterStatus.Add(player1.GetComponent<FighterStatus>());
                 fighterStatus.Add(player2.GetComponent<FighterStatus>());
                 break;
-            case "1P":
-                fighterStatus.Add(player1.GetComponent<FighterStatus>());
-                break;
             default:
                 break;
         }
     }
 
+    public void SetUI()
+    {
+        healthBarP1 = GameObject.FindGameObjectWithTag("HealthBarP1").GetComponent<Image>();
+        healthBarP2 = GameObject.FindGameObjectWithTag("HealthBarP2").GetComponent<Image>();
+
+        ratioTextP1 = GameObject.FindGameObjectWithTag("RatioTextP1").GetComponent<Text>();
+        ratioTextP2 = GameObject.FindGameObjectWithTag("RatioTextP2").GetComponent<Text>();
+
+        specialBarP1 = GameObject.FindGameObjectWithTag("SpecialBarP1").GetComponent<Image>();
+        specialBarP2 = GameObject.FindGameObjectWithTag("SpecialBarP2").GetComponent<Image>();
+
+        specialRatioTextP1 = GameObject.FindGameObjectWithTag("SpecialRatioTextP1").GetComponent<Text>();
+        specialRatioTextP2 = GameObject.FindGameObjectWithTag("SpecialRatioTextP2").GetComponent<Text>();
+
+        counterText = GameObject.FindGameObjectWithTag("TimerTxt").GetComponent<Text>();
+    }
+
     public void UIUpdate()
     {
-        for (int i = 0; i < fighterStatus.Count; i++)
-        {
-            healthBar[i].fillAmount = fighterStatus[i].health / 100;
-            ratioText[i].text = fighterStatus[i].health.ToString("0");
-        }
+        HealthBarUpdate();
+        SpecialBarUpdate();
+    }
+
+    public void HealthBarUpdate()
+    {
+        healthBarP1.fillAmount = fighterStatus[0].health / 100;
+        ratioTextP1.text = fighterStatus[0].health.ToString("0");
+
+        healthBarP2.fillAmount = fighterStatus[1].health / 100;
+        ratioTextP2.text = fighterStatus[1].health.ToString("0");
+    }
+
+    public void SpecialBarUpdate()
+    {
+        specialBarP1.fillAmount = fighterStatus[0].specialPoints / 100;
+        specialRatioTextP1.text = fighterStatus[0].specialPoints.ToString("0");
+
+        specialBarP2.fillAmount = fighterStatus[1].specialPoints / 100;
+        specialRatioTextP2.text = fighterStatus[1].specialPoints.ToString("0");
     }
 
     void FixedUpdate()
     {
+        Timer();
         UIUpdate();
         RoundEnded();
     }
@@ -158,6 +205,7 @@ public class GameManager : MonoBehaviour
         if(roundCounterP1Int == 2 || roundCounterP2Int == 2)
         {
             matchFullyEnded = true;
+            RoundUnsubs();
             StartCoroutine(WaitForEnd());
         }
 
@@ -185,13 +233,13 @@ public class GameManager : MonoBehaviour
 
         fighterStatus.Clear();
         LoadScene.instance.ReloadScene();
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        RoundSubs();
     }
 
     public void MatchEnded()
-    { 
-        SceneManager.sceneLoaded -= OnSceneLoaded;
+    {
         LoadScene.instance.LoadMainMenu();
+        characterSelection.SelfDestruction();
         Destroy(gameObject);
     }
 
@@ -199,6 +247,27 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(5);
         MatchEnded();
+    }
+
+    public void Timer()
+    {
+        timeCounter += Time.deltaTime;
+        TimerDisplay();
+    }
+
+    public void TimerDisplay()
+    {
+        counterText.text = timeCounter.ToString("F2");
+    }
+
+    public void ClearTimer()
+    {
+        timeCounter = 0;
+    }
+
+    public void CounterClear()
+    {
+        playerCount = 0;
     }
 
     public void ExitGame()

@@ -12,16 +12,17 @@ public class MyCharacterController : MonoBehaviour
     [SerializeField] private float speed = 6f;
     [SerializeField] private float jumpSpeed = 10f;
     [SerializeField] private float fallSpeed = 14f;
+    [SerializeField] private float pushBack = 6f;
 
     //Input system 
     public float inputHor, inputVer = 0f;
-    private bool inputJump = false;
-    private bool inputPunch = false;
-    private bool inputKick = false;
-    private bool inputSpecialAttack = false;
+    public bool isBlocking = false;
+    public bool inputJump = false;
+    public bool inputPunch = false;
+    public bool inputKick = false;
+    public bool inputSpecialAttack = false;
     [SerializeField] private bool isFrozen = false;
     [SerializeField] private float inputTimer = 0.5f;
-    public bool isBlocking = false;
 
     // Input methods
     public void SetMove(Vector2 move)
@@ -30,6 +31,7 @@ public class MyCharacterController : MonoBehaviour
         {
             return;
         }
+
         inputHor = move.x;
         inputVer = move.y;
     }
@@ -45,6 +47,7 @@ public class MyCharacterController : MonoBehaviour
         {
             return;
         }
+
         inputPunch = punch;
     }
 
@@ -69,8 +72,11 @@ public class MyCharacterController : MonoBehaviour
         {
             return;
         }
+
         isBlocking = blocking;
         gameObject.GetComponent<FighterAnimation>().BlockAnimation(isBlocking);
+        inputHor = 0;
+        inputVer = 0;
     }
 
     void Start()
@@ -109,6 +115,8 @@ public class MyCharacterController : MonoBehaviour
             inputTimer = 3f;
             StartCoroutine(AnimationRoutine(inputTimer));
             gameObject.GetComponent<FighterAnimation>().SpecialAnimation();
+            gameObject.GetComponent<FighterStatus>().specialPoints = 0;
+            gameObject.GetComponent<FighterStatus>().hasSpecial = false;
             inputSpecialAttack = false;
         }
 
@@ -134,17 +142,6 @@ public class MyCharacterController : MonoBehaviour
         Animate();
     }
 
-    //public void FreezePlayerControl()
-    //{
-    //    isFrozen = true;
-    ////inputHor = 0;
-    ////    inputVer = 0;
-    //}
-
-    //public void UnFreezePlayerControl()
-    //{
-    //    isFrozen = false;
-    //}
 
     private IEnumerator AnimationRoutine(float freezeTime)
     {
@@ -163,6 +160,11 @@ public class MyCharacterController : MonoBehaviour
         yield break;
     }
 
+    public void PushedBack()
+    {
+        moveVector.x += pushBack * Time.deltaTime;
+        moveVector *= speed;
+    }
 }
 
 

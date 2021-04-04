@@ -6,11 +6,16 @@ using UnityEngine.UI;
 public class FighterStatus : MonoBehaviour
 {
     GameManager manager;
-    private bool dead = false;
+
+    [Header("Player Manager")]
+    public bool dead = false;
+    public bool hasSpecial = false;
+    public int specialWeight = 1;
 
     [Header("Stats")]
     public int playerID;
     public float health;
+    public float specialPoints = 0;
     public float punchDamage;
     public float kickDamage;
     public float specialDamage;
@@ -19,6 +24,11 @@ public class FighterStatus : MonoBehaviour
     {
         manager = GameManager.instance;
         health = 100.0f;
+    }
+
+    private void FixedUpdate()
+    {
+        SpecialUpdate();
     }
 
     public void ReceiveDamage(float damage)
@@ -30,6 +40,7 @@ public class FighterStatus : MonoBehaviour
         else
         {
             health -= damage;
+            gameObject.GetComponent<MyCharacterController>().PushedBack();
             gameObject.GetComponent<FighterAnimation>().TorsoHitAnimation();
 
             if (health <= 0)
@@ -38,6 +49,29 @@ public class FighterStatus : MonoBehaviour
                 gameObject.GetComponent<FighterAnimation>().DeadAnimation();
             }
         }
+    }
+
+    public void SpecialUpdate()
+    {
+        if(specialPoints < 100)
+        {
+            specialPoints += manager.timeCounter / specialWeight / 120;
+        }
+        else
+        {
+            hasSpecial = true;
+            specialPoints = 100;
+        }
+    }
+
+    public bool HasSpecial()
+    {
+        if (hasSpecial)
+        {
+            specialWeight++;
+        }
+
+        return hasSpecial;
     }
 
     public bool GetDead()

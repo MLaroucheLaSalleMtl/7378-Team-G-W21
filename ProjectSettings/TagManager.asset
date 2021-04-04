@@ -11,6 +11,12 @@ TagManager:
   - RatioTextP1
   - HealthBarP2
   - RatioTextP2
+  - AttackDamageTxt
+  - TimerTxt
+  - SpecialBarP1
+  - SpecialBarP2
+  - SpecialRatioTextP1
+  - SpecialRatioTextP2
   layers:
   - Default
   - TransparentFX

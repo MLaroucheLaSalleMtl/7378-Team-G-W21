@@ -6,7 +6,10 @@ using UnityEngine.InputSystem;
 public class PlayerHandler : MonoBehaviour
 {
     GameManager manager;
+    TutorialManager tutorialManager;
+    TrainingManager trainingManager;
     private MyCharacterController player = null;
+    private PauseMenu pauseMenu = null;
 
     private bool inputJump = false;
     private bool inputPunch = false;
@@ -14,13 +17,40 @@ public class PlayerHandler : MonoBehaviour
     private bool inputSpecialAttack = false;
     public bool isBlocking = false;
 
+    public bool isPaused = false;
+
     void Start()
     {
-        manager = GameManager.instance;
-        player = manager.GetPlayer();
-        if(player == null)
+        pauseMenu = PauseMenu.instance;
+
+        if(GameObject.Find("GameManager") != null)
         {
-            Destroy(this.gameObject);
+            manager = GameManager.instance;
+            player = manager.GetPlayer();
+            if (player == null)
+            {
+                Destroy(this.gameObject);
+            }
+        }
+
+        else if (GameObject.Find("TutorialManager"))
+        {
+            tutorialManager = TutorialManager.instance;
+            player = tutorialManager.GetPlayer();
+            if (player == null)
+            {
+                Destroy(this.gameObject);
+            }
+        }
+
+        else if (GameObject.Find("TrainingManager"))
+        {
+            trainingManager = TrainingManager.instance;
+            player = trainingManager.GetPlayer();
+            if (player == null)
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
 
@@ -38,7 +68,6 @@ public class PlayerHandler : MonoBehaviour
 
     public void OnPunch(InputAction.CallbackContext context) // U or West Button
     {
-
         inputPunch = context.performed;
         player.SetPunch(inputPunch);
     }
@@ -51,13 +80,22 @@ public class PlayerHandler : MonoBehaviour
 
     public void OnSpecialAttack(InputAction.CallbackContext context) // O or Left Shoulder
     {
-        inputSpecialAttack = context.performed;
-        player.SetSpecialAttack(inputSpecialAttack);
+        if (player.GetComponent<FighterStatus>().HasSpecial())
+        {
+            inputSpecialAttack = context.performed;
+            player.SetSpecialAttack(inputSpecialAttack);
+        }
     }
 
     public void OnBlocking(InputAction.CallbackContext context) // K or Right Shoulder
     {
         isBlocking = context.performed;
         player.SetBlocking(isBlocking);
+    }
+
+    public void OnPause(InputAction.CallbackContext context) // ESC or Start
+    {
+        isPaused = context.performed;
+        pauseMenu.Pause(isPaused);
     }
 }

@@ -5,18 +5,15 @@ using UnityEngine.UI;
 
 public class SelectMenu : MonoBehaviour
 {
+    public static SelectMenu instance = null;
     [Header("First item in these list will be selected by default")]
     [SerializeField] private GameObject[] panels = null; // list of all the panels 
     [SerializeField] private Selectable[] defaultBtn = null; // not just for buttons 
 
-
-
-    // Start is called before the first frame update
     IEnumerator Start()
     {
         yield return new WaitForFixedUpdate(); // delay the excecution of the code to the next fixed update
         PanelToggle(0);
-
     }
 
     public void SavePrefs()
@@ -36,5 +33,4 @@ public class SelectMenu : MonoBehaviour
             }
         }
     }
-
 }
