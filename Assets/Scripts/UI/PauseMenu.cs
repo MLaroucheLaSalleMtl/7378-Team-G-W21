@@ -7,12 +7,22 @@ using UnityEngine.InputSystem;
 public class PauseMenu : MonoBehaviour
 {
     GameManager manager;
+    TrainingManager trainingManager;
+    TutorialManager tutorialManager;
+    CharacterSelection characterSelection;
+    StageSelection stageSelection;
+
     public static PauseMenu instance = null;
     public GameObject pauseMenuUI;
 
     private void Awake()
     {
         manager = GameManager.instance;
+        trainingManager = TrainingManager.instance;
+        tutorialManager = TutorialManager.instance;
+        characterSelection = CharacterSelection.instance;
+        stageSelection = StageSelection.instance;
+
         if (instance == null)
         {
             instance = this;
@@ -41,12 +51,34 @@ public class PauseMenu : MonoBehaviour
     public void OnMainMenu()
     {
         Time.timeScale = 1f;
-        manager.RoundUnsubs();
-        manager.MatchEnded();
+
+        if (GameObject.Find("GameManager") != null)
+        {
+            manager.RoundUnsubs();
+            manager.MatchEnded();
+        }
+        else
+        {
+            characterSelection.SelfDestruction();
+            stageSelection.SelfDestruction();
+            LoadScene.instance.LoadMainMenu();
+        }
     }
 
     public void OnQuit()
     {
-        manager.ExitGame();
+        if(GameObject.Find("GameManager") != null)
+        {
+            manager.ExitGame();
+        }
+        else if(GameObject.Find("TrainingManager") != null)
+        {
+            trainingManager.ExitGame();
+        }
+        else if (GameObject.Find("TutorialManager") != null)
+        {
+            tutorialManager.ExitGame();
+        }
+
     }
 }

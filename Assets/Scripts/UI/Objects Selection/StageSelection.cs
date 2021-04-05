@@ -49,7 +49,10 @@ public class StageSelection : MonoBehaviour
 
     public void OnConfirmation()
     {
-        selectMenu.PanelToggle(4);
+        if(stageSelected != null)
+        {
+            selectMenu.PanelToggle(4);
+        }
     }
 
     public void OnClearStageSelection()

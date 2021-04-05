@@ -33,36 +33,15 @@ public class CharacterSelection : MonoBehaviour
 
     public void OnCharacterSelection(int charID)
     {
-        switch (playModeSelected)
+        if (charactersSelected.Count == 0)
         {
-            case "Tutorial":
-                if(charactersSelected.Count == 0)
-                {
-                    charactersSelected.Add(charactersLeftList[charID]);
-                    selectedPlayersLeftImages[charID].GetComponent<Image>().color = Color.yellow;
-                }
-                break;
-            case "Training":
-                if (charactersSelected.Count == 0)
-                {
-                    charactersSelected.Add(charactersLeftList[charID]);
-                    selectedPlayersLeftImages[charID].GetComponent<Image>().color = Color.yellow;
-                }
-                break;
-            case "2P":
-                if (charactersSelected.Count == 0)
-                {
-                    charactersSelected.Add(charactersLeftList[charID]);
-                    selectedPlayersLeftImages[charID].GetComponent<Image>().color = Color.yellow;
-                }
-                else if (charactersSelected.Count == 1)
-                {
-                    charactersSelected.Add(charactersRightList[charID]);
-                    selectedPlayersRightImages[charID].GetComponent<Image>().color = Color.yellow;
-                }
-                break;
-            default:
-                break;
+            charactersSelected.Add(charactersLeftList[charID]);
+            selectedPlayersLeftImages[charID].GetComponent<Image>().color = Color.yellow;
+        }
+        else if (charactersSelected.Count == 1)
+        {
+            charactersSelected.Add(charactersRightList[charID]);
+            selectedPlayersRightImages[charID].GetComponent<Image>().color = Color.yellow;
         }
     }
 
@@ -85,19 +64,9 @@ public class CharacterSelection : MonoBehaviour
 
     public void OnPlayModeSelection()
     {
-        if (charactersSelected.Count > 0)
+        if (charactersSelected.Count == 2)
         {
-            if (playModeSelected == "2P")
-            {
-                if (charactersSelected.Count == 2)
-                {
-                    LoadScene.instance.LoadAnyScene(playModeSelected);
-                }
-            }
-            else
-            {
-                LoadScene.instance.LoadAnyScene(playModeSelected);
-            }
+            LoadScene.instance.LoadAnyScene(playModeSelected);
         }
     }
     

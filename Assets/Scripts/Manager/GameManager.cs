@@ -102,6 +102,8 @@ public class GameManager : MonoBehaviour
     {
         CounterClear();
         ClearTimer();
+        SetStage();
+        InstantiateStage();
         SetPlayers();
         SetPlayMode();
         InstantiatePlayers();
@@ -255,6 +257,7 @@ public class GameManager : MonoBehaviour
     {
         LoadScene.instance.LoadMainMenu();
         characterSelection.SelfDestruction();
+        stageSelection.SelfDestruction();
         Destroy(gameObject);
     }
 

@@ -8,18 +8,24 @@ public class TrainingManager : MonoBehaviour
 {
     public static TrainingManager instance = null;
 
-    //User Interface
+    [Header("User Interface")]
     [SerializeField] private Image healthBarP2 = null;
     [SerializeField] private Text ratioTextP2 = null;
     [SerializeField] private Text attackDamageTxt = null;
 
-    //Player Manager
+    [Header("Player Manager")]
     [SerializeField] private CharacterSelection characterSelection;
     [SerializeField] private List<GameObject> charactersSelected = new List<GameObject>();
     [SerializeField] private List<FighterStatus> fighterStatus = new List<FighterStatus>();
     [SerializeField] private Vector3 spawnPositionP1 = new Vector3(2.56f, 0.07f, -5.76f);
+    [SerializeField] private Vector3 spawnPositionP2 = new Vector3(-2.56f, 0.07f, -5.76f);
     [SerializeField] private GameObject player1 = null;
     [SerializeField] private GameObject player2 = null;
+
+    [Header("Stage Manager")]
+    [SerializeField] private StageSelection stageSelection;
+    [SerializeField] private GameObject stageSelected = null;
+    [SerializeField] private Vector3 spawnPositionStage = new Vector3(0, 0, 0);
 
     public MyCharacterController GetPlayer()
     {
@@ -42,11 +48,9 @@ public class TrainingManager : MonoBehaviour
     void Start()
     {
         characterSelection = CharacterSelection.instance;
+        stageSelection = StageSelection.instance;
 
-        SetPlayers();
-        InstantiatePlayers();
-        SetFighterStatus();
-        SetUI();
+        GetRoundReady();
     }
 
     void Update()
@@ -60,14 +64,35 @@ public class TrainingManager : MonoBehaviour
         }
     }
 
+    public void GetRoundReady()
+    {
+        SetStage();
+        InstantiateStage();
+        SetPlayers();
+        InstantiatePlayers();
+        SetFighterStatus();
+        SetUI();
+    }
+
+    public void SetStage()
+    {
+        stageSelected = stageSelection.GetStage();
+    }
+
     public void SetPlayers()
     {
         charactersSelected = characterSelection.GetCharacters().GetClone();
     }
 
+    public void InstantiateStage()
+    {
+        Instantiate(stageSelected, spawnPositionStage, Quaternion.identity);
+    }
+
     public void InstantiatePlayers()
     {
         Instantiate(charactersSelected[0], spawnPositionP1, Quaternion.identity);
+        Instantiate(charactersSelected[1], spawnPositionP2, Quaternion.identity);
         player1 = GameObject.FindGameObjectWithTag("Player1");
         player2 = GameObject.FindGameObjectWithTag("Player2");
     }
@@ -104,5 +129,14 @@ public class TrainingManager : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(1);
         HealthReset();
+    }
+
+    public void ExitGame()
+    {
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
+        #endif
     }
 }
