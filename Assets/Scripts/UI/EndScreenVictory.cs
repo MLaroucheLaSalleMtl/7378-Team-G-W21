@@ -8,7 +8,7 @@ public class EndScreenVictory : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.instance.matchFullyEnded)
+        if (GameManager.instance.isMatchEnded)
         {
             endScreen.SetActive(true);
         }

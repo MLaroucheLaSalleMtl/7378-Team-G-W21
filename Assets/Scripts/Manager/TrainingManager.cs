@@ -57,8 +57,9 @@ public class TrainingManager : MonoBehaviour
     {
         UIUpdate();
         ShowAttackDamage();
+        SpecialPump();
 
-        if (fighterStatus[0].health != 100)
+        if (fighterStatus[1].health != 100)
         {
             StartCoroutine(WaitForHealthReset());
         }
@@ -99,6 +100,7 @@ public class TrainingManager : MonoBehaviour
 
     public void SetFighterStatus()
     {
+        fighterStatus.Add(player1.GetComponent<FighterStatus>());
         fighterStatus.Add(player2.GetComponent<FighterStatus>());
     }
 
@@ -111,18 +113,23 @@ public class TrainingManager : MonoBehaviour
 
     public void UIUpdate()
     { 
-        healthBarP2.fillAmount = fighterStatus[0].health / 100;
-        ratioTextP2.text = fighterStatus[0].health.ToString("0");
+        healthBarP2.fillAmount = fighterStatus[1].health / 100;
+        ratioTextP2.text = fighterStatus[1].health.ToString("0");
     }
 
     public void HealthReset()
     {
-        fighterStatus[0].health = 100;
+        fighterStatus[1].health = 100;
+    }
+
+    public void SpecialPump()
+    {
+        fighterStatus[0].specialPoints = 100;
     }
 
     public void ShowAttackDamage()
     {
-        attackDamageTxt.text = ((fighterStatus[0].health - 100) * (-1)).ToString("0");
+        attackDamageTxt.text = ((fighterStatus[1].health - 100) * (-1)).ToString("0");
     }
 
     IEnumerator WaitForHealthReset()

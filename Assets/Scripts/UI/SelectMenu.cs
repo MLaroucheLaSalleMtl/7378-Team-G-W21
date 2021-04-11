@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class SelectMenu : MonoBehaviour
 {
@@ -9,10 +10,11 @@ public class SelectMenu : MonoBehaviour
 
     [Header("First item in these list will be selected by default")]
     [SerializeField] private GameObject[] panels = null; // list of all the panels 
-    [SerializeField] private Selectable[] defaultBtn = null; // not just for buttons 
+    [SerializeField] private GameObject[] defaultBtns;
 
     private void Awake()
     {
+        Debug.Log(Input.GetJoystickNames().Length);
         if (instance == null)
         {
             instance = this;
@@ -40,10 +42,14 @@ public class SelectMenu : MonoBehaviour
         {
             // will enable or disable the panel 
             panels[i].SetActive(position == i); // position == i : true or false 
-            if (position == i)  
+
+            /*
+            if (position == i)
             {
-                defaultBtn[i].Select(); // will set the focus on the button 
+                EventSystem.current.SetSelectedGameObject(null);
+                EventSystem.current.SetSelectedGameObject(defaultBtns[position]);
             }
+            */
         }
     }
 }

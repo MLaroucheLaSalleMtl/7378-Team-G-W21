@@ -99,6 +99,8 @@ public class TutorialManager : MonoBehaviour
         }
         else if (popUpIndex == 4)
         {
+            SpecialPump();
+
             if (player1.GetComponent<MyCharacterController>().inputSpecialAttack)
             {
                 popUpIndex++;
@@ -144,6 +146,11 @@ public class TutorialManager : MonoBehaviour
     public void LoadMainMenu()
     {
         LoadScene.instance.LoadMainMenu();
+    }
+
+    public void SpecialPump()
+    {
+        player1.GetComponent<FighterStatus>().specialPoints = 100;
     }
 
     IEnumerator WaitForEnd()

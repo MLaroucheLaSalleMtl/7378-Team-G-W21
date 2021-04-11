@@ -24,5 +24,4 @@ public class ButtonHandler : MonoBehaviour, IPointerEnterHandler, IDeselectHandl
     {
         GetComponent<Selectable>().Select(); // will put the focus wherever the cursor is hovering 
     }
-
 }

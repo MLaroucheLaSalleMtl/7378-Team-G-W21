@@ -27,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 350241036}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.643, y: 0.31, z: 0}
-  m_LocalScale: {x: 0.797417, y: 0.18315406, z: 0.44270274}
+  m_LocalPosition: {x: -0.824, y: 0.288, z: 0}
+  m_LocalScale: {x: 1.040408, y: 0.2381122, z: 0.7162604}
   m_Children: []
   m_Father: {fileID: 1764898994742706656}
   m_RootOrder: 2
@@ -1986,7 +1986,7 @@ GameObject:
   - component: {fileID: 1764898993284670468}
   - component: {fileID: 2097771723}
   m_Layer: 0
-  m_Name: BlueChar
+  m_Name: BlueCharP1
   m_TagString: Player1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2061,11 +2061,16 @@ MonoBehaviour:
   speed: 5
   jumpSpeed: 0.1
   fallSpeed: 14
+  pushBack: 6
   inputHor: 0
   inputVer: 0
+  isBlocking: 0
+  inputJump: 0
+  inputPunch: 0
+  inputKick: 0
+  inputSpecialAttack: 0
   isFrozen: 0
   inputTimer: 2
-  isBlocking: 0
 --- !u!114 &1764898993284670469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2082,6 +2087,8 @@ MonoBehaviour:
   - {fileID: 1764898993554510197}
   - {fileID: 1764898994480636123}
   - {fileID: 350241038}
+  fireball: {fileID: 0}
+  fireballSpawn: {fileID: 0}
 --- !u!114 &1764898993284670468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2094,7 +2101,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72f25d01e9d1a74428520ee135a05d4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dead: 0
+  hasSpecial: 0
+  specialWeight: 1
+  specialCounter: 0
+  specialCounterRate: 15
+  playerID: 0
   health: 100
+  specialPoints: 0
   punchDamage: 10
   kickDamage: 15
   specialDamage: 25
@@ -2172,8 +2186,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1764898993554510199}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.596, y: 0.071999975, z: 0}
-  m_LocalScale: {x: 1.1730036, y: 0.1546651, z: 0.62416655}
+  m_LocalPosition: {x: -1.724, y: 0.071999975, z: 0}
+  m_LocalScale: {x: 1.4424424, y: 0.1546651, z: 0.62416655}
   m_Children: []
   m_Father: {fileID: 1764898994742706656}
   m_RootOrder: 0
@@ -2647,8 +2661,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1764898994480636100}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.29, y: 0.265, z: 0}
-  m_LocalScale: {x: 1.5227326, y: 0.17441583, z: 0.44270274}
+  m_LocalPosition: {x: -1.29, y: 0.225, z: 0}
+  m_LocalScale: {x: 2.1040673, y: 0.25001958, z: 0.47147843}
   m_Children: []
   m_Father: {fileID: 1764898994742706656}
   m_RootOrder: 1

@@ -9,12 +9,12 @@ public class RoundTracker : MonoBehaviour
 
     void Start()
     {
-        for (int i = 0; i < GameManager.instance.roundCounterP1Int; i++)    
+        for (int i = 0; i < GameManager.instance.roundCounterP1; i++)    
         {
             roundCounterP1Image[i].SetActive(true);
         }
 
-        for (int i = 0; i < GameManager.instance.roundCounterP2Int; i++)
+        for (int i = 0; i < GameManager.instance.roundCounterP2; i++)
         {
             roundCounterP2Image[i].SetActive(true);
         }

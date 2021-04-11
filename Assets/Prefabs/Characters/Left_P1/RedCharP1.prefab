@@ -2106,6 +2106,7 @@ MonoBehaviour:
   hasSpecial: 0
   specialWeight: 1
   specialCounter: 0
+  specialCounterRate: 15
   playerID: 1
   health: 100
   specialPoints: 0
@@ -2186,8 +2187,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1764898993554510199}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.596, y: 0.071999975, z: 0}
-  m_LocalScale: {x: 1.1730036, y: 0.1546651, z: 0.62416655}
+  m_LocalPosition: {x: -1.776, y: 0.071999975, z: 0}
+  m_LocalScale: {x: 1.5362828, y: 0.1609909, z: 0.83788115}
   m_Children: []
   m_Father: {fileID: 1764898994742706656}
   m_RootOrder: 0
@@ -2661,8 +2662,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1764898994480636100}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.29, y: 0.265, z: 0}
-  m_LocalScale: {x: 1.5227326, y: 0.17441583, z: 0.44270274}
+  m_LocalPosition: {x: -1.54, y: 0.265, z: 0}
+  m_LocalScale: {x: 2.1362662, y: 0.20195608, z: 0.83117867}
   m_Children: []
   m_Father: {fileID: 1764898994742706656}
   m_RootOrder: 1

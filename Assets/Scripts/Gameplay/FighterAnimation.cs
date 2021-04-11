@@ -32,6 +32,11 @@ public class FighterAnimation : MonoBehaviour
         animator.SetBool("IsBlocking", isBlocking);
     }
 
+    public void BlockedHitAnimation()
+    {
+        animator.SetTrigger("BlockedHit");
+    }
+
     public void SpecialAnimation()
     {
         switch (gameObject.GetComponent<FighterStatus>().playerID)
@@ -43,7 +48,7 @@ public class FighterAnimation : MonoBehaviour
                 animator.SetTrigger("SpecialAttack1");
                 break;
             case 2:
-                animator.SetTrigger("SpecialAttack2");
+                animator.SetTrigger("SpecialAttack0");
                 break;
             default:
                 break;

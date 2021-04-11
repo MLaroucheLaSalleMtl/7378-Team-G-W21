@@ -17,7 +17,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Text ratioTextP1 = null;
     [SerializeField] private Text ratioTextP2 = null;
     [SerializeField] private Text counterText;
-    public float timeCounter = 99f;
     [SerializeField] private Image specialBarP1 = null;
     [SerializeField] private Image specialBarP2 = null;
     [SerializeField] private Text specialRatioTextP1 = null;
@@ -37,12 +36,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject stageSelected = null;
     [SerializeField] private Vector3 spawnPositionStage = new Vector3(0, 0, 0);
 
-    //Match Manager
+    [Header("Match Manager")]
+    public float timeCounter = 99f;
     [SerializeField] private string playModeSelected;
-    public int roundCounterP1Int { get; set; }
-    public int roundCounterP2Int { get; set; }
-    public bool roundIsEnded = false;
-    public bool matchFullyEnded { get; set; } = false;
+    public int roundCounterP1;
+    public int roundCounterP2;
+    public bool isRoundEnded = false;
+    public bool isMatchEnded = false;
 
     public MyCharacterController GetPlayer()
     {
@@ -219,35 +219,36 @@ public class GameManager : MonoBehaviour
 
     public void RoundEnded()
     {
-        if(roundCounterP1Int == 2 || roundCounterP2Int == 2)
+        if(roundCounterP1 == 2 || roundCounterP2 == 2)
         {
-            matchFullyEnded = true;
             RoundUnsubs();
             StartCoroutine(WaitForEnd());
         }
 
         if (fighterStatus[0].health <= 0)
         {
-            roundIsEnded = true;    
-            roundCounterP2Int++;
+            isRoundEnded = true;
+            roundCounterP2++;
             LoadNewRound();
         }
 
         if (fighterStatus[1].health <= 0)
         {
-            roundIsEnded = true;
-            roundCounterP1Int++;
+            isRoundEnded = true;
+            roundCounterP1++;
             LoadNewRound();
         }
     }
 
     public void LoadNewRound()
     {
-        if (roundIsEnded)   
+        if (roundCounterP1 != 0 || roundCounterP2 != 0)
         {
-            roundIsEnded = false;
+            RoundUnsubs();
         }
 
+        isRoundEnded = false;
+        isMatchEnded = false;
         fighterStatus.Clear();
         LoadScene.instance.ReloadScene();
         RoundSubs();
@@ -255,6 +256,7 @@ public class GameManager : MonoBehaviour
 
     public void MatchEnded()
     {
+        isMatchEnded = true;
         LoadScene.instance.LoadMainMenu();
         characterSelection.SelfDestruction();
         stageSelection.SelfDestruction();
@@ -270,7 +272,31 @@ public class GameManager : MonoBehaviour
     public void Timer()
     {
         timeCounter -= Time.deltaTime;
+        TimesUp();
         TimerDisplay();
+    }
+
+    public void TimesUp()
+    {
+        if(timeCounter <= 0)
+        {
+            if(fighterStatus[0].health > fighterStatus[1].health)
+            {
+                roundCounterP1++;
+                if(roundCounterP1 < 2)
+                {
+                    LoadNewRound();
+                }
+            }
+            else
+            {
+                roundCounterP2++;
+                if (roundCounterP2 < 2)
+                {
+                    LoadNewRound();
+                }
+            }
+        }
     }
 
     public void TimerDisplay()

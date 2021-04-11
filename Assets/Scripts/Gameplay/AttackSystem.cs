@@ -15,7 +15,7 @@ public class AttackSystem : MonoBehaviour
     private void LaunchAttackOne() 
     {
         damage = gameObject.GetComponent<FighterStatus>().punchDamage;
-
+       
         var cols = Physics.OverlapBox(colliders[0].bounds.center, colliders[0].bounds.extents, colliders[0].transform.rotation, LayerMask.GetMask("Hurtbox"));
         foreach (Collider c in cols)
         {

@@ -63,6 +63,11 @@ public class MyCharacterController : MonoBehaviour
 
     public void SetSpecialAttack(bool specialAttack)
     {
+        if (isFrozen)
+        {
+            return;
+        }
+
         inputSpecialAttack = specialAttack;
     }
 
@@ -96,7 +101,7 @@ public class MyCharacterController : MonoBehaviour
     {
         if (inputPunch)
         {
-            inputTimer = 0.8f;
+            inputTimer = gameObject.GetComponent<FighterStatus>().punchLockOut;
             StartCoroutine(AnimationRoutine(inputTimer));
             gameObject.GetComponent<FighterAnimation>().PunchAnimation();
             inputPunch = false;
@@ -161,8 +166,8 @@ public class MyCharacterController : MonoBehaviour
 
     public void PushedBack()
     {
-        moveVector.x += pushBack * Time.deltaTime;
-        moveVector *= speed;
+ 
+
     }
 }
 

@@ -12,6 +12,7 @@ public class FighterStatus : MonoBehaviour
     public bool hasSpecial = false;
     public int specialWeight = 1;
     public float specialCounter = 0f;
+    public float specialCounterRate = 15f;
 
     [Header("Stats")]
     public int playerID;
@@ -20,6 +21,11 @@ public class FighterStatus : MonoBehaviour
     public float punchDamage;
     public float kickDamage;
     public float specialDamage;
+
+    [Header("Move LockOut")]
+    public float punchLockOut;
+    public float kickLockOut;
+    public float specialLockOut;
 
     private void Awake()
     {
@@ -36,6 +42,7 @@ public class FighterStatus : MonoBehaviour
     {
         if (gameObject.GetComponent<MyCharacterController>().isBlocking)
         {
+            gameObject.GetComponent<FighterAnimation>().BlockedHitAnimation();
             return;
         }
         else

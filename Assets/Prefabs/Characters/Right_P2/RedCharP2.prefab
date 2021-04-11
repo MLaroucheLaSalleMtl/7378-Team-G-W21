@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 350241036}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.643, y: 0.31, z: 0}
+  m_LocalPosition: {x: 0.643, y: 0.31, z: 0}
   m_LocalScale: {x: 0.797417, y: 0.18315406, z: 0.44270274}
   m_Children: []
   m_Father: {fileID: 1764898994742706656}
@@ -2000,10 +2000,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1764898993284670466}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.56, y: 0.07, z: -5.76}
+  m_LocalPosition: {x: 2.806, y: 0.07, z: -5.76}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 6758311255590761349}
+  - {fileID: 9172144600972238258}
   - {fileID: 1764898993389691502}
   - {fileID: 1764898993073743340}
   - {fileID: 1764898993073743346}
@@ -2089,7 +2089,7 @@ MonoBehaviour:
   - {fileID: 1764898994480636123}
   - {fileID: 350241038}
   fireball: {fileID: 8849338254907735854, guid: ed36cc23ba85c114382db23ab1f7bae9, type: 3}
-  fireballSpawn: {fileID: 4615568603004636586}
+  fireballSpawn: {fileID: 4787149726025189948}
 --- !u!114 &1764898993284670468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2106,6 +2106,7 @@ MonoBehaviour:
   hasSpecial: 0
   specialWeight: 1
   specialCounter: 0
+  specialCounterRate: 15
   playerID: 1
   health: 100
   specialPoints: 0
@@ -2186,8 +2187,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1764898993554510199}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.596, y: 0.071999975, z: 0}
-  m_LocalScale: {x: 1.1730036, y: 0.1546651, z: 0.62416655}
+  m_LocalPosition: {x: 1.776, y: 0.071999975, z: 0}
+  m_LocalScale: {x: 1.5362828, y: 0.1609909, z: 0.83788115}
   m_Children: []
   m_Father: {fileID: 1764898994742706656}
   m_RootOrder: 0
@@ -2661,8 +2662,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1764898994480636100}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.29, y: 0.265, z: 0}
-  m_LocalScale: {x: 1.5227326, y: 0.17441583, z: 0.44270274}
+  m_LocalPosition: {x: 1.54, y: 0.265, z: 0}
+  m_LocalScale: {x: 2.1362662, y: 0.20195608, z: 0.83117867}
   m_Children: []
   m_Father: {fileID: 1764898994742706656}
   m_RootOrder: 1
@@ -2754,7 +2755,7 @@ Transform:
   m_GameObject: {fileID: 1764898994742706657}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1.152, z: 0}
-  m_LocalScale: {x: -0.8182801, y: 2.1773517, z: 0.8182801}
+  m_LocalScale: {x: 0.8182801, y: 2.1773517, z: 0.8182801}
   m_Children:
   - {fileID: 1764898993554510198}
   - {fileID: 1764898994480636120}
@@ -2762,7 +2763,7 @@ Transform:
   m_Father: {fileID: 1764898993389691502}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &4615568603004636586
+--- !u!1 &4787149726025189948
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2770,23 +2771,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6758311255590761349}
+  - component: {fileID: 9172144600972238258}
   m_Layer: 0
-  m_Name: FireBallSpawn
+  m_Name: FireballSpawn
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6758311255590761349
+--- !u!4 &9172144600972238258
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4615568603004636586}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.936, y: 1.309, z: 0.163}
+  m_GameObject: {fileID: 4787149726025189948}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.995, y: 1.287, z: 0.142}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1764898993284670471}
