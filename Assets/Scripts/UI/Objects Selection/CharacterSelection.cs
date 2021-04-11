@@ -62,7 +62,7 @@ public class CharacterSelection : MonoBehaviour
         return playModeSelected;
     }
 
-    public void OnPlayModeSelection()
+    public void OnConfirmation()
     {
         if (charactersSelected.Count == 2)
         {

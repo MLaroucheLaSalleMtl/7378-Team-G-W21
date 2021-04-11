@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class FighterStatus : MonoBehaviour
 {
-    GameManager manager;
-
     [Header("Player Manager")]
     public bool dead = false;
     public bool hasSpecial = false;
@@ -15,9 +13,10 @@ public class FighterStatus : MonoBehaviour
     public float specialCounterRate = 15f;
 
     [Header("Stats")]
+    [SerializeField] private SettingsSelection settingsSelection;
     public int playerID;
     public float health;
-    public float specialPoints = 0;
+    public float specialPoints;
     public float punchDamage;
     public float kickDamage;
     public float specialDamage;
@@ -27,15 +26,24 @@ public class FighterStatus : MonoBehaviour
     public float kickLockOut;
     public float specialLockOut;
 
-    private void Awake()
+    void Start()
     {
-        manager = GameManager.instance;
-        health = 100.0f;
+        settingsSelection = SettingsSelection.instance;
+        GetStats();
     }
 
     private void FixedUpdate()
     {
         SpecialUpdate();
+    }
+
+    public void GetStats()
+    {
+        specialPoints = 0;
+        health = settingsSelection.health;
+        punchDamage = settingsSelection.punchDamage;
+        kickDamage = settingsSelection.kickDamage;
+        specialDamage = settingsSelection.specialDamage;
     }
 
     public void ReceiveDamage(float damage)
@@ -63,14 +71,14 @@ public class FighterStatus : MonoBehaviour
     {
         SpecialCounter();
 
-        if(specialPoints < 100)
+        if(specialPoints < settingsSelection.specialPoints)
         {
             specialPoints += specialCounter / specialWeight / 120;
         }
         else
         {
             hasSpecial = true;
-            specialPoints = 100;
+            specialPoints = settingsSelection.specialPoints;
         }
     }
 

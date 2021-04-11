@@ -38,6 +38,8 @@ public class GameManager : MonoBehaviour
 
     [Header("Match Manager")]
     public float timeCounter = 99f;
+    [SerializeField] private SettingsSelection settingsSelection;
+    [SerializeField] private float timeToMainMenu = 3.5f;
     [SerializeField] private string playModeSelected;
     public int roundCounterP1;
     public int roundCounterP2;
@@ -89,6 +91,7 @@ public class GameManager : MonoBehaviour
     {
         characterSelection = CharacterSelection.instance;
         stageSelection = StageSelection.instance;
+        settingsSelection = SettingsSelection.instance;
 
         GetRoundReady();
     }
@@ -101,7 +104,7 @@ public class GameManager : MonoBehaviour
     public void GetRoundReady()
     {
         CounterClear();
-        ClearTimer();
+        SetTimer();
         SetStage();
         InstantiateStage();
         SetPlayers();
@@ -194,19 +197,19 @@ public class GameManager : MonoBehaviour
 
     public void HealthBarUpdate()
     {
-        healthBarP1.fillAmount = fighterStatus[0].health / 100;
+        healthBarP1.fillAmount = fighterStatus[0].health / settingsSelection.health;
         ratioTextP1.text = fighterStatus[0].health.ToString("0");
 
-        healthBarP2.fillAmount = fighterStatus[1].health / 100;
+        healthBarP2.fillAmount = fighterStatus[1].health / settingsSelection.health;
         ratioTextP2.text = fighterStatus[1].health.ToString("0");
     }
 
     public void SpecialBarUpdate()
     {
-        specialBarP1.fillAmount = fighterStatus[0].specialPoints / 100;
+        specialBarP1.fillAmount = fighterStatus[0].specialPoints / settingsSelection.specialPoints;
         specialRatioTextP1.text = fighterStatus[0].specialPoints.ToString("0");
 
-        specialBarP2.fillAmount = fighterStatus[1].specialPoints / 100;
+        specialBarP2.fillAmount = fighterStatus[1].specialPoints / settingsSelection.specialPoints;
         specialRatioTextP2.text = fighterStatus[1].specialPoints.ToString("0");
     }
 
@@ -265,8 +268,13 @@ public class GameManager : MonoBehaviour
 
     IEnumerator WaitForEnd()
     {
-        yield return new WaitForSecondsRealtime(5);
+        yield return new WaitForSecondsRealtime(timeToMainMenu);
         MatchEnded();
+    }
+
+    public void SetTimer()
+    {
+        timeCounter = settingsSelection.timer;
     }
 
     public void Timer()
@@ -302,11 +310,6 @@ public class GameManager : MonoBehaviour
     public void TimerDisplay()
     {
         counterText.text = timeCounter.ToString("F1");
-    }
-
-    public void ClearTimer()
-    {
-        timeCounter = 99f;
     }
 
     public void CounterClear()
