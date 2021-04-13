@@ -7,7 +7,7 @@ public class FireBallBehaviour : MonoBehaviour
     [SerializeField] private float fireballDamage = 30f;
     [SerializeField] private float fireballSpeed = 7f;
     private GameObject otherPlayer;
-    [SerializeField] private GameObject fireball;
+    //[SerializeField] private GameObject fireball;
 
     void OnTriggerEnter(Collider other)
     {

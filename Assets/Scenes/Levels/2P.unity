@@ -2554,7 +2554,6 @@ MonoBehaviour:
   ratioTextP1: {fileID: 0}
   ratioTextP2: {fileID: 0}
   counterText: {fileID: 0}
-  timeCounter: 0
   specialBarP1: {fileID: 0}
   specialBarP2: {fileID: 0}
   specialRatioTextP1: {fileID: 0}
@@ -2569,8 +2568,14 @@ MonoBehaviour:
   stageSelection: {fileID: 0}
   stageSelected: {fileID: 0}
   spawnPositionStage: {x: 0, y: 0, z: 0}
+  timeCounter: 0
+  settingsSelection: {fileID: 0}
+  timeToMainMenu: 3.5
   playModeSelected: 
-  roundIsEnded: 0
+  roundCounterP1: 0
+  roundCounterP2: 0
+  isRoundEnded: 0
+  isMatchEnded: 0
 --- !u!4 &1387281740
 Transform:
   m_ObjectHideFlags: 0

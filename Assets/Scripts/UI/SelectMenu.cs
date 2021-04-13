@@ -14,7 +14,6 @@ public class SelectMenu : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log(Input.GetJoystickNames().Length);
         if (instance == null)
         {
             instance = this;

@@ -2066,7 +2066,6 @@ MonoBehaviour:
   inputHor: 0
   inputVer: 0
   isBlocking: 0
-  inputJump: 0
   inputPunch: 0
   inputKick: 0
   inputSpecialAttack: 0
@@ -2088,7 +2087,7 @@ MonoBehaviour:
   - {fileID: 1764898993554510197}
   - {fileID: 1764898994480636123}
   - {fileID: 350241038}
-  fireball: {fileID: 8849338254907735854, guid: 58191bb0b66d9924d87c4cc83e888e34, type: 3}
+  fireball: {fileID: 8083939254657930345, guid: 58191bb0b66d9924d87c4cc83e888e34, type: 3}
   fireballSpawn: {fileID: 4787149726025189948}
 --- !u!114 &1764898993284670468
 MonoBehaviour:
@@ -2107,12 +2106,18 @@ MonoBehaviour:
   specialWeight: 1
   specialCounter: 0
   specialCounterRate: 15
+  settingsSelection: {fileID: 0}
   playerID: 1
   health: 100
   specialPoints: 0
   punchDamage: 10
   kickDamage: 15
   specialDamage: 25
+  punchLockOut: 0.24
+  kickLockOut: 0.65
+  specialLockOut: 1.47
+  hitStun: 0
+  blockStun: 0
 --- !u!114 &2097771723
 MonoBehaviour:
   m_ObjectHideFlags: 0

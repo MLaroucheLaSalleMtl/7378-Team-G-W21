@@ -10,18 +10,15 @@ public class MyCharacterController : MonoBehaviour
     private Vector3 moveVector;
     private float verticalVelocity;
     [SerializeField] private float speed = 6f;
-    [SerializeField] private float jumpSpeed = 10f;
     [SerializeField] private float fallSpeed = 14f;
-    [SerializeField] private float pushBack = 6f;
 
     //Input system 
     public float inputHor, inputVer = 0f;
     public bool isBlocking = false;
-    public bool inputJump = false;
     public bool inputPunch = false;
     public bool inputKick = false;
     public bool inputSpecialAttack = false;
-    [SerializeField] private bool isFrozen = false;
+    public bool isFrozen = false;
     [SerializeField] private float inputTimer = 0.5f;
 
     // Input methods
@@ -36,14 +33,9 @@ public class MyCharacterController : MonoBehaviour
         inputVer = move.y;
     }
 
-    public void SetJump(bool jump)
-    {
-        inputJump = jump;
-    }
-
     public void SetPunch(bool punch)
     {
-        if (isFrozen)
+        if (isFrozen || isBlocking)
         {
             return;
         }
@@ -53,7 +45,7 @@ public class MyCharacterController : MonoBehaviour
 
     public void SetKick(bool kick)
     {
-        if (isFrozen)
+        if (isFrozen || isBlocking)
         {
             return;
         }
@@ -63,7 +55,7 @@ public class MyCharacterController : MonoBehaviour
 
     public void SetSpecialAttack(bool specialAttack)
     {
-        if (isFrozen)
+        if (isFrozen || isBlocking)
         {
             return;
         }
@@ -80,8 +72,6 @@ public class MyCharacterController : MonoBehaviour
 
         isBlocking = blocking;
         gameObject.GetComponent<FighterAnimation>().BlockAnimation(isBlocking);
-        inputHor = 0;
-        inputVer = 0;
     }
 
     void Start()
@@ -99,6 +89,12 @@ public class MyCharacterController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (isBlocking == true) 
+        {
+            inputHor = 0;
+            inputVer = 0;
+        }
+
         if (inputPunch)
         {
             inputTimer = gameObject.GetComponent<FighterStatus>().punchLockOut;
@@ -109,7 +105,7 @@ public class MyCharacterController : MonoBehaviour
 
         if (inputKick)
         {
-            inputTimer = 1.5f;
+            inputTimer = gameObject.GetComponent<FighterStatus>().kickLockOut;
             StartCoroutine(AnimationRoutine(inputTimer));
             gameObject.GetComponent<FighterAnimation>().KickAnimation();
             inputKick = false;
@@ -117,26 +113,15 @@ public class MyCharacterController : MonoBehaviour
 
         if (inputSpecialAttack)
         {
-            inputTimer = 3f;
+            inputTimer = gameObject.GetComponent<FighterStatus>().specialLockOut;
             StartCoroutine(AnimationRoutine(inputTimer));
             gameObject.GetComponent<FighterAnimation>().SpecialAnimation();
             gameObject.GetComponent<FighterStatus>().ResetSpecialAttack();
             inputSpecialAttack = false;
         }
 
-        if (controller.isGrounded)
-        {
-            verticalVelocity = -1;
-            if (inputJump)
-            {
-                verticalVelocity = jumpSpeed;
-            }
-        }
-        else
-        {
-            verticalVelocity -= fallSpeed * Time.deltaTime;
-        }
 
+        verticalVelocity = -1;
         moveVector = Vector3.zero;
         moveVector = new Vector3(-inputHor, inputVer, 0);
         moveVector *= speed;
@@ -164,23 +149,19 @@ public class MyCharacterController : MonoBehaviour
         yield break;
     }
 
-    public void PushedBack()
+    public void PushedBack(float pushBack)
     {
- 
+        Vector3 pushedBack = new Vector3(0 + pushBack, 0, 0);
+        controller.SimpleMove(pushedBack);
+    }
 
+    public void DeadWithNoControl()
+    {
+        isFrozen = true;
     }
 }
 
 
-// use lerp to smooth animations 
-//[SerializeField] private float lerpTime = 0.05f;
-
-//Vector3 targetVelocity = moveVector * speed;
-
-//targetVelocity.y = verticalVelocity;
-//Vector3 nextVelocity = Vector3.Lerp(controller.velocity, targetVelocity, lerpTime * Time.deltaTime);
-
-//controller.Move(nextVelocity * Time.deltaTime);
 
 
 

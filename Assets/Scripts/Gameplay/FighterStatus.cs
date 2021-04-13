@@ -15,6 +15,7 @@ public class FighterStatus : MonoBehaviour
     [Header("Stats")]
     [SerializeField] private SettingsSelection settingsSelection;
     public int playerID;
+    public string playerName;
     public float health;
     public float specialPoints;
     public float punchDamage;
@@ -25,6 +26,10 @@ public class FighterStatus : MonoBehaviour
     public float punchLockOut;
     public float kickLockOut;
     public float specialLockOut;
+    public float hitStun;
+    public float blockStun;
+    public float playerPushBack = 10f;
+
 
     void Start()
     {
@@ -50,18 +55,22 @@ public class FighterStatus : MonoBehaviour
     {
         if (gameObject.GetComponent<MyCharacterController>().isBlocking)
         {
+            StartCoroutine(HitStunBlockStunLockOut(blockStun));
+            PushBack();
             gameObject.GetComponent<FighterAnimation>().BlockedHitAnimation();
             return;
         }
         else
         {
             health -= damage;
-            gameObject.GetComponent<MyCharacterController>().PushedBack();
+            PushBack();
+            StartCoroutine(HitStunBlockStunLockOut(hitStun));
             gameObject.GetComponent<FighterAnimation>().TorsoHitAnimation();
 
             if (health <= 0)
             {
                 dead = true;
+                gameObject.GetComponent<MyCharacterController>().DeadWithNoControl();
                 gameObject.GetComponent<FighterAnimation>().DeadAnimation();
             }
         }
@@ -104,4 +113,36 @@ public class FighterStatus : MonoBehaviour
     {
         return dead;
     }
+
+    public void PushBack()
+    {
+        if (gameObject.transform.root.CompareTag("Player1"))    
+        {
+            gameObject.GetComponent<MyCharacterController>().PushedBack(playerPushBack);
+        }
+
+        if (gameObject.transform.root.CompareTag("Player2"))
+        {
+            gameObject.GetComponent<MyCharacterController>().PushedBack(-playerPushBack);
+        }
+
+    }
+
+    private IEnumerator HitStunBlockStunLockOut(float freezeTime)   
+    {
+        float time = freezeTime;
+        gameObject.GetComponent<MyCharacterController>().isFrozen = true;
+        gameObject.GetComponent<MyCharacterController>().inputHor = 0;
+        gameObject.GetComponent<MyCharacterController>().inputVer = 0;
+
+        while (time >= 0)
+        {
+            time -= Time.deltaTime;
+            yield return null;
+        }
+
+        gameObject.GetComponent<MyCharacterController>().isFrozen = false;
+        yield break;
+    }
+
 }

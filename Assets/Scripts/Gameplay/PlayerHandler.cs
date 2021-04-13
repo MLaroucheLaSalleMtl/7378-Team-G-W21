@@ -60,11 +60,6 @@ public class PlayerHandler : MonoBehaviour
         player.SetMove(v);
     }
 
-    public void OnJump(InputAction.CallbackContext context) // Spacekey or South Button
-    {
-        inputJump = context.performed;
-        player.SetJump(inputJump);
-    }
 
     public void OnPunch(InputAction.CallbackContext context) // U or West Button
     {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -48,19 +49,36 @@ public class GameManager : MonoBehaviour
 
     public MyCharacterController GetPlayer()
     {
+        var keyboard = Keyboard.current;
+        var gamepad = Gamepad.current;
+
         if (charactersSelected.Count > playerCount)
         {
             if (playerCount == 0)
             {
-                MyCharacterController pl = player1.GetComponent<MyCharacterController>();
-                playerCount++;
-                return pl;
+                if(keyboard != null || gamepad != null)
+                {
+                    MyCharacterController pl = player1.GetComponent<MyCharacterController>();
+                    playerCount++;
+                    return pl;
+                }
+                else
+                {
+                    return null;
+                }
             }
             else if (playerCount == 1)
             {
-                MyCharacterController pl = player2.GetComponent<MyCharacterController>();
-                playerCount++;
-                return pl;
+                if(keyboard != null || gamepad != null)
+                {
+                    MyCharacterController pl = player2.GetComponent<MyCharacterController>();
+                    playerCount++;
+                    return pl;
+                }
+                else
+                {
+                    return null;
+                }
             }
             else
             {
@@ -72,6 +90,7 @@ public class GameManager : MonoBehaviour
         {
             return null;
         }
+        
     }
 
     private void Awake()

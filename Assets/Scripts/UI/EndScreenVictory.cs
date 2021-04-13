@@ -17,5 +17,4 @@ public class EndScreenVictory : MonoBehaviour
             endScreen.SetActive(false);
         }
     }
-
 }

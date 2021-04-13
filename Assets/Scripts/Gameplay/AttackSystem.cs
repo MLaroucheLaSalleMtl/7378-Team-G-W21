@@ -33,7 +33,6 @@ public class AttackSystem : MonoBehaviour
             Debug.Log(c.name);
 
             //gameObject -> attacking //otherPlayer -> being attacked
-
             otherPlayer.GetComponent<FighterStatus>().ReceiveDamage(damage);
         }
     }

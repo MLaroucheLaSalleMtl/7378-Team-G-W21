@@ -12,6 +12,11 @@ public class FighterAnimation : MonoBehaviour
         animator.SetBool("isDead", true);
     }
 
+    public void VictoryAnimation()
+    {
+        animator.SetBool("Victory", true);
+    }
+
     public void PunchAnimation()
     {
         animator.SetTrigger("AttackOne");

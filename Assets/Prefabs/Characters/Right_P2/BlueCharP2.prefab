@@ -2065,7 +2065,6 @@ MonoBehaviour:
   inputHor: 0
   inputVer: 0
   isBlocking: 0
-  inputJump: 0
   inputPunch: 0
   inputKick: 0
   inputSpecialAttack: 0
@@ -2106,12 +2105,16 @@ MonoBehaviour:
   specialWeight: 1
   specialCounter: 0
   specialCounterRate: 15
+  settingsSelection: {fileID: 0}
   playerID: 0
   health: 100
   specialPoints: 0
   punchDamage: 10
   kickDamage: 15
   specialDamage: 25
+  punchLockOut: 0.24
+  kickLockOut: 0.65
+  specialLockOut: 0
 --- !u!114 &2097771723
 MonoBehaviour:
   m_ObjectHideFlags: 0

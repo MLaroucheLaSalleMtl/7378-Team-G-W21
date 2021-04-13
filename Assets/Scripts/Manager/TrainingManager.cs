@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class TrainingManager : MonoBehaviour
@@ -29,8 +30,18 @@ public class TrainingManager : MonoBehaviour
 
     public MyCharacterController GetPlayer()
     {
-        MyCharacterController pl = player1.GetComponent<MyCharacterController>();
-        return pl;
+        var keyboard = Keyboard.current;
+        var gamepad = Gamepad.current;
+
+        if (keyboard != null || gamepad != null)
+        {
+            MyCharacterController pl = player1.GetComponent<MyCharacterController>();
+            return pl;
+        }
+        else
+        {
+            return null;
+        }
     }
 
     private void Awake()
@@ -131,6 +142,16 @@ public class TrainingManager : MonoBehaviour
     {
         attackDamageTxt.text = ((fighterStatus[1].health - 100) * (-1)).ToString("0");
     }
+
+    public void SetAiToBlock()
+    {
+        player2.GetComponent<MyCharacterController>().SetBlocking(true);
+    }
+    public void SetAiToNotBlock()
+    {
+        player2.GetComponent<MyCharacterController>().SetBlocking(false);
+    }
+
 
     IEnumerator WaitForHealthReset()
     {

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -29,8 +30,18 @@ public class TutorialManager : MonoBehaviour
 
     public MyCharacterController GetPlayer()
     {
-        MyCharacterController pl = player1.GetComponent<MyCharacterController>();
-        return pl;
+        var keyboard = Keyboard.current;
+        var gamepad = Gamepad.current;
+
+        if (keyboard != null || gamepad != null)
+        {
+            MyCharacterController pl = player1.GetComponent<MyCharacterController>();
+            return pl;
+        }
+        else
+        {
+            return null;
+        }
     }
 
     private void Awake()

@@ -14,14 +14,6 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Jump",
-                    "type": "Button",
-                    "id": "1272aafd-90a2-453d-b6ec-134cec27b63c",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
                     "name": "Blocking",
                     "type": "Button",
                     "id": "e68cc317-252a-43bb-8397-1e45fa5e30a8",
@@ -236,28 +228,6 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Attack 2",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "a3fe24ab-5986-4876-84c0-c57d94dc2a05",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "747eafac-ce92-4736-b33a-e12b66159832",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
