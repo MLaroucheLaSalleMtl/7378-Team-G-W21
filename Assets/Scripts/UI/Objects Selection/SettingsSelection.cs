@@ -106,6 +106,10 @@ public class SettingsSelection : MonoBehaviour
         {
             punchDamage = 15;
         }
+        else if (val == 3)
+        {
+            punchDamage = 100;
+        }
     }
 
     public void OnKickSelection(int val)

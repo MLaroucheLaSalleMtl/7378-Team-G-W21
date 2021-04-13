@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    [SerializeField] public static List<AudioClip> audioClips;
+    [SerializeField] private List<AudioClip> clips = new List<AudioClip>();
+
+    private Dictionary<string, AudioClip> clipDict = new Dictionary<string, AudioClip>();
 
     // Start is called before the first frame update
     void Start()

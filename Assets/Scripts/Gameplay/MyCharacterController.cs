@@ -10,7 +10,6 @@ public class MyCharacterController : MonoBehaviour
     private Vector3 moveVector;
     private float verticalVelocity;
     [SerializeField] private float speed = 6f;
-    [SerializeField] private float fallSpeed = 14f;
 
     //Input system 
     public float inputHor, inputVer = 0f;

@@ -11,7 +11,6 @@ public class PlayerHandler : MonoBehaviour
     private MyCharacterController player = null;
     private PauseMenu pauseMenu = null;
 
-    private bool inputJump = false;
     private bool inputPunch = false;
     private bool inputKick = false;
     private bool inputSpecialAttack = false;

@@ -29,6 +29,7 @@ public class FighterStatus : MonoBehaviour
     public float hitStun;
     public float blockStun;
     public float playerPushBack = 10f;
+    public float playerPushbackOnBlock = 20f;
 
 
     void Start()
@@ -56,7 +57,7 @@ public class FighterStatus : MonoBehaviour
         if (gameObject.GetComponent<MyCharacterController>().isBlocking)
         {
             StartCoroutine(HitStunBlockStunLockOut(blockStun));
-            PushBack();
+            PushBackOnBlock();
             gameObject.GetComponent<FighterAnimation>().BlockedHitAnimation();
             return;
         }
@@ -74,6 +75,11 @@ public class FighterStatus : MonoBehaviour
                 gameObject.GetComponent<FighterAnimation>().DeadAnimation();
             }
         }
+    }
+
+    public void VictoryDance()
+    {
+        gameObject.GetComponent<FighterAnimation>().VictoryAnimation();
     }
 
     public void SpecialUpdate()
@@ -125,8 +131,21 @@ public class FighterStatus : MonoBehaviour
         {
             gameObject.GetComponent<MyCharacterController>().PushedBack(-playerPushBack);
         }
-
     }
+
+    public void PushBackOnBlock()
+    {
+        if (gameObject.transform.root.CompareTag("Player1"))
+        {
+            gameObject.GetComponent<MyCharacterController>().PushedBack(playerPushbackOnBlock);
+        }
+
+        if (gameObject.transform.root.CompareTag("Player2"))
+        {
+            gameObject.GetComponent<MyCharacterController>().PushedBack(-playerPushbackOnBlock);
+        }
+    }
+
 
     private IEnumerator HitStunBlockStunLockOut(float freezeTime)   
     {

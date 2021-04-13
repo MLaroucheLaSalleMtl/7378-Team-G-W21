@@ -16,7 +16,8 @@ public class SetVol : MonoBehaviour
     void Start()
     {
         slider = GetComponent<Slider>(); 
-        float v = PlayerPrefs.GetFloat(nameParam, 0); 
+        float v = PlayerPrefs.GetFloat(nameParam, 0);
+        Debug.Log(v);
         slider.value = v; 
         audioM.SetFloat(nameParam, v);
     }

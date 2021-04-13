@@ -18,6 +18,7 @@ public class TutorialManager : MonoBehaviour
     [Header("Player Manager")] 
     [SerializeField] private CharacterSelection characterSelection;
     [SerializeField] private List<GameObject> charactersSelected = new List<GameObject>();
+    [SerializeField] private List<FighterStatus> fighterStatus = new List<FighterStatus>();
     [SerializeField] private Vector3 spawnPositionP1 = new Vector3(2.56f, 0.07f, -5.76f);
     [SerializeField] private Vector3 spawnPositionP2 = new Vector3(-2.56f, 0.07f, -5.76f);
     [SerializeField] private GameObject player1 = null;
@@ -68,9 +69,19 @@ public class TutorialManager : MonoBehaviour
 
     void Update()
     {
-        for(int i = 0; i < popUps.Length; i++)
+        PanelsDisplay();
+
+        if (fighterStatus[1].health != 100)
         {
-            if(i == popUpIndex)
+            StartCoroutine(WaitForHealthReset());
+        }
+    }
+
+    public void PanelsDisplay()
+    {
+        for (int i = 0; i < popUps.Length; i++)
+        {
+            if (i == popUpIndex)
             {
                 popUps[i].SetActive(true);
             }
@@ -129,6 +140,7 @@ public class TutorialManager : MonoBehaviour
         InstantiateStage();
         SetPlayers();
         InstantiatePlayers();
+        SetFighterStatus();
     }
 
     public void SetStage()
@@ -139,6 +151,12 @@ public class TutorialManager : MonoBehaviour
     public void SetPlayers()
     {
         charactersSelected = characterSelection.GetCharacters().GetClone();
+    }
+
+    public void SetFighterStatus()
+    {
+        fighterStatus.Add(player1.GetComponent<FighterStatus>());
+        fighterStatus.Add(player2.GetComponent<FighterStatus>());
     }
 
     public void InstantiateStage()
@@ -159,6 +177,11 @@ public class TutorialManager : MonoBehaviour
         LoadScene.instance.LoadMainMenu();
     }
 
+    public void HealthReset()
+    {
+        fighterStatus[1].health = 100;
+    }
+
     public void SpecialPump()
     {
         player1.GetComponent<FighterStatus>().specialPoints = 100;
@@ -170,6 +193,12 @@ public class TutorialManager : MonoBehaviour
         characterSelection.SelfDestruction();
         stageSelection.SelfDestruction();
         LoadMainMenu();
+    }
+
+    IEnumerator WaitForHealthReset()
+    {
+        yield return new WaitForSecondsRealtime(1);
+        HealthReset();
     }
 
     public void ExitGame()

@@ -56,6 +56,7 @@ public class PauseMenu : MonoBehaviour
         {
             manager.RoundUnsubs();
             manager.MatchEnded();
+            LoadScene.instance.LoadMainMenu(); 
         }
         else
         {
@@ -79,6 +80,5 @@ public class PauseMenu : MonoBehaviour
         {
             tutorialManager.ExitGame();
         }
-
     }
 }

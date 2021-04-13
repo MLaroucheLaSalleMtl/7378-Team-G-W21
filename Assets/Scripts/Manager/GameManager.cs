@@ -9,6 +9,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
 
+    [Header("Instances")]
+    [SerializeField] private CharacterSelection characterSelection;
+    [SerializeField] private StageSelection stageSelection;
+    [SerializeField] private SettingsSelection settingsSelection;
+
     [Header("Input Manager")]
     [SerializeField] private int playerCount = 0;
 
@@ -24,28 +29,51 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Text specialRatioTextP2 = null;
 
     [Header("Player Manager")]
-    [SerializeField] private CharacterSelection characterSelection;
     [SerializeField] private List<GameObject> charactersSelected = new List<GameObject>();
     [SerializeField] private List<FighterStatus> fighterStatus = new List<FighterStatus>();
     [SerializeField] private Vector3 spawnPositionP1 = new Vector3(2.56f, 0.07f, -5.76f);
     [SerializeField] private Vector3 spawnPositionP2 = new Vector3(-2.56f, 0.07f, -5.76f);
-    [SerializeField] private GameObject player1 = null;
-    [SerializeField] private GameObject player2 = null;
+    public GameObject player1 = null;
+    public GameObject player2 = null;
 
     [Header("Stage Manager")]
-    [SerializeField] private StageSelection stageSelection;
     [SerializeField] private GameObject stageSelected = null;
     [SerializeField] private Vector3 spawnPositionStage = new Vector3(0, 0, 0);
 
     [Header("Match Manager")]
     public float timeCounter = 99f;
-    [SerializeField] private SettingsSelection settingsSelection;
-    [SerializeField] private float timeToMainMenu = 3.5f;
+    [SerializeField] private float timeToVictoryScreen = 3.5f;
     [SerializeField] private string playModeSelected;
     public int roundCounterP1;
     public int roundCounterP2;
     public bool isRoundEnded = false;
     public bool isMatchEnded = false;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(instance);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    void Start()
+    {
+        GetInstancesReady();
+        GetRoundReady();
+    }
+
+    void FixedUpdate()
+    {
+        Timer();
+        UIUpdate();
+        RoundEnded();
+    }
 
     public MyCharacterController GetPlayer()
     {
@@ -93,26 +121,11 @@ public class GameManager : MonoBehaviour
         
     }
 
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(instance);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    void Start()
+    public void GetInstancesReady()
     {
         characterSelection = CharacterSelection.instance;
         stageSelection = StageSelection.instance;
         settingsSelection = SettingsSelection.instance;
-
-        GetRoundReady();
     }
     
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -122,6 +135,8 @@ public class GameManager : MonoBehaviour
 
     public void GetRoundReady()
     {
+        isRoundEnded = false;
+        isMatchEnded = false;
         CounterClear();
         SetTimer();
         SetStage();
@@ -232,33 +247,38 @@ public class GameManager : MonoBehaviour
         specialRatioTextP2.text = fighterStatus[1].specialPoints.ToString("0");
     }
 
-    void FixedUpdate()
-    {
-        Timer();
-        UIUpdate();
-        RoundEnded();
-    }
-
     public void RoundEnded()
     {
-        if(roundCounterP1 == 2 || roundCounterP2 == 2)
-        {
-            RoundUnsubs();
-            StartCoroutine(WaitForEnd());
-        }
-
         if (fighterStatus[0].health <= 0)
         {
             isRoundEnded = true;
             roundCounterP2++;
-            LoadNewRound();
+            if (roundCounterP2 >= 2)
+            {
+                player2.GetComponent<FighterStatus>().VictoryDance();
+                RoundUnsubs();
+                StartCoroutine(WaitForEnd());
+            }
+            else
+            {
+                LoadNewRound();
+            }
         }
 
-        if (fighterStatus[1].health <= 0)
+        else if (fighterStatus[1].health <= 0)
         {
             isRoundEnded = true;
             roundCounterP1++;
-            LoadNewRound();
+            if (roundCounterP1 >= 2)
+            {
+                player1.GetComponent<FighterStatus>().VictoryDance();
+                RoundUnsubs();
+                Invoke("SetMatchEndedTrue", 5f);
+            }
+            else
+            {
+                LoadNewRound();
+            }
         }
     }
 
@@ -269,26 +289,29 @@ public class GameManager : MonoBehaviour
             RoundUnsubs();
         }
 
-        isRoundEnded = false;
-        isMatchEnded = false;
         fighterStatus.Clear();
         LoadScene.instance.ReloadScene();
         RoundSubs();
     }
 
-    public void MatchEnded()
+    IEnumerator WaitForEnd()
+    {
+        yield return new WaitForSecondsRealtime(timeToVictoryScreen);
+
+        yield break;
+    }
+
+    public void SetMatchEndedTrue()
     {
         isMatchEnded = true;
-        LoadScene.instance.LoadMainMenu();
+    }
+
+
+    public void MatchEnded()
+    {
         characterSelection.SelfDestruction();
         stageSelection.SelfDestruction();
         Destroy(gameObject);
-    }
-
-    IEnumerator WaitForEnd()
-    {
-        yield return new WaitForSecondsRealtime(timeToMainMenu);
-        MatchEnded();
     }
 
     public void SetTimer()
@@ -334,6 +357,14 @@ public class GameManager : MonoBehaviour
     public void CounterClear()
     {
         playerCount = 0;
+    }
+
+    public void Rematch()
+    {
+        roundCounterP1 = 0;
+        roundCounterP2 = 0;
+        RoundUnsubs();
+        LoadNewRound();
     }
 
     public void ExitGame()

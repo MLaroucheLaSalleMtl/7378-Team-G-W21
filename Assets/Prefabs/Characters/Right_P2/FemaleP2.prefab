@@ -567,9 +567,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
-  jumpSpeed: 10
   fallSpeed: 14
-  pushBack: 6
   inputHor: 0
   inputVer: 0
   isBlocking: 0
@@ -615,6 +613,7 @@ MonoBehaviour:
   specialCounterRate: 15
   settingsSelection: {fileID: 0}
   playerID: 2
+  playerName: 
   health: 100
   specialPoints: 0
   punchDamage: 25
@@ -623,6 +622,10 @@ MonoBehaviour:
   punchLockOut: 0.6
   kickLockOut: 0.74
   specialLockOut: 0.93
+  hitStun: 0
+  blockStun: 0
+  playerPushBack: 10
+  playerPushbackOnBlock: 20
 --- !u!114 &2014604157981700619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2524,7 +2527,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7556726465353319870}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.19, y: 0.23, z: -1.43}
+  m_LocalPosition: {x: 0.19, y: 0.23, z: 1.43}
   m_LocalScale: {x: 0.5543768, y: 0.2889812, z: 1.0237614}
   m_Children: []
   m_Father: {fileID: 3648405619780779517}
@@ -2619,7 +2622,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8491969657954177811}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.056, y: 0.177, z: -1.505}
+  m_LocalPosition: {x: 0.056, y: 0.177, z: 1.505}
   m_LocalScale: {x: 0.37372676, y: 0.1546651, z: 2.2385526}
   m_Children: []
   m_Father: {fileID: 3648405619780779517}
@@ -2714,7 +2717,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8795839040842689490}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.058, y: 0.088, z: -1.366}
+  m_LocalPosition: {x: 0.058, y: 0.088, z: 1.366}
   m_LocalScale: {x: 0.73499256, y: 0.21607834, z: 1.5167668}
   m_Children: []
   m_Father: {fileID: 3648405619780779517}
