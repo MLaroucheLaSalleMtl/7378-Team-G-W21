@@ -102,8 +102,8 @@ public class MyCharacterController : MonoBehaviour
         if (inputPunch)
         {
             inputTimer = gameObject.GetComponent<FighterStatus>().punchLockOut;
+            PlaySFX("Woosh");
             StartCoroutine(AnimationRoutine(inputTimer));
-            PlaySFX("Whoosh");
             gameObject.GetComponent<FighterAnimation>().PunchAnimation();
             inputPunch = false;
         }

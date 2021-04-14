@@ -43,6 +43,8 @@ public class CountdownController : MonoBehaviour
         countdownText.text = "Fight!";
         yield return new WaitForSecondsRealtime(timeBetweenCountdownTxt);
         ClosePanel();
+
+        SoundManager.instance.ChangeMusic("Free Sci-Fi Track 3 (Loop)");
         yield return null;
     }
 
