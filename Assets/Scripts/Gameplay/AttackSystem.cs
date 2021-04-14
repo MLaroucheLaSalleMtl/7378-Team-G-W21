@@ -67,7 +67,7 @@ public class AttackSystem : MonoBehaviour
     {
         damage = gameObject.GetComponent<FighterStatus>().specialDamage;
 
-        var cols = Physics.OverlapBox(colliders[1].bounds.center, colliders[1].bounds.extents, colliders[1].transform.rotation, LayerMask.GetMask("Hurtbox"));
+        var cols = Physics.OverlapBox(colliders[2].bounds.center, colliders[2].bounds.extents, colliders[2].transform.rotation, LayerMask.GetMask("Hurtbox"));
         foreach (Collider c in cols)
         {
             if (c.transform.root == transform) //used to check if i'm hitting myself 

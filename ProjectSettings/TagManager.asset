@@ -17,6 +17,7 @@ TagManager:
   - SpecialBarP2
   - SpecialRatioTextP1
   - SpecialRatioTextP2
+  - SoundEffects
   layers:
   - Default
   - TransparentFX

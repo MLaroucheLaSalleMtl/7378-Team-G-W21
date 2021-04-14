@@ -18,11 +18,13 @@ public class EndScreenVictory : MonoBehaviour
     {
         manager = GameManager.instance;
         ClearImagesDisplay();
+
+        manager.onVictoryDanceFinish += PanelDisplay;
     }
 
-    void Update()
+    private void OnDisable()
     {
-        PanelDisplay();
+        manager.onVictoryDanceFinish -= PanelDisplay;
     }
 
     public void ClearImagesDisplay()
@@ -45,16 +47,14 @@ public class EndScreenVictory : MonoBehaviour
 
     public void PanelDisplay()
     {
-        if (manager.isMatchEnded)
-        {
-            endScreenPanel.SetActive(true);
-            ImagesDisplay();
-            Time.timeScale = 0f;
-        }
-        else
-        {
-            endScreenPanel.SetActive(false);
-        }
+        TogglePanel(true);
+        ImagesDisplay();
+        Time.timeScale = 0f;
+    }
+
+    public void TogglePanel(bool toggle)
+    {
+        endScreenPanel.SetActive(toggle);
     }
 
     public void ImagesDisplay()
@@ -76,11 +76,12 @@ public class EndScreenVictory : MonoBehaviour
         Time.timeScale = 1f;
         manager.Rematch();
         manager.isMatchEnded = false;
-        manager.isRoundEnded = false;
     }
 
     public void OnMainMenu()
     {
+        Time.timeScale = 1f;
+        manager.RoundUnsubs();
         manager.MatchEnded();
         LoadScene.instance.LoadMainMenu();
     }

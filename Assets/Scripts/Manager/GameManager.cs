@@ -46,8 +46,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private string playModeSelected;
     public int roundCounterP1;
     public int roundCounterP2;
-    public bool isRoundEnded = false;
     public bool isMatchEnded = false;
+
+    public System.Action onVictoryDanceFinish;
 
     private void Awake()
     {
@@ -135,7 +136,6 @@ public class GameManager : MonoBehaviour
 
     public void GetRoundReady()
     {
-        isRoundEnded = false;
         isMatchEnded = false;
         CounterClear();
         SetTimer();
@@ -247,17 +247,23 @@ public class GameManager : MonoBehaviour
         specialRatioTextP2.text = fighterStatus[1].specialPoints.ToString("0");
     }
 
+    private bool isInVictoryPanel = false;
+
     public void RoundEnded()
     {
         if (fighterStatus[0].health <= 0)
         {
-            isRoundEnded = true;
             roundCounterP2++;
             if (roundCounterP2 >= 2)
             {
-                player2.GetComponent<FighterStatus>().VictoryDance();
-                RoundUnsubs();
-                StartCoroutine(WaitForEnd());
+                if (!isInVictoryPanel)
+                {
+                    player2.GetComponent<FighterStatus>().VictoryDance();
+                    player2.GetComponent<MyCharacterController>().VictoryWithNoControl();
+                    Invoke("OnVictoryDanceFinish", 4f);
+                    RoundUnsubs();
+                    isInVictoryPanel = true;
+                }
             }
             else
             {
@@ -267,19 +273,28 @@ public class GameManager : MonoBehaviour
 
         else if (fighterStatus[1].health <= 0)
         {
-            isRoundEnded = true;
             roundCounterP1++;
             if (roundCounterP1 >= 2)
             {
-                player1.GetComponent<FighterStatus>().VictoryDance();
-                RoundUnsubs();
-                Invoke("SetMatchEndedTrue", 5f);
+                if (!isInVictoryPanel)
+                {
+                    player1.GetComponent<FighterStatus>().VictoryDance();
+                    player1.GetComponent<MyCharacterController>().VictoryWithNoControl();
+                    Invoke("OnVictoryDanceFinish", 4f);
+                    RoundUnsubs();
+                    isInVictoryPanel = true;
+                }
             }
             else
             {
                 LoadNewRound();
             }
         }
+    }
+
+    private void OnVictoryDanceFinish()
+    {
+        onVictoryDanceFinish?.Invoke();
     }
 
     public void LoadNewRound()
@@ -361,11 +376,15 @@ public class GameManager : MonoBehaviour
 
     public void Rematch()
     {
+        isMatchEnded = false;
         roundCounterP1 = 0;
         roundCounterP2 = 0;
         RoundUnsubs();
         LoadNewRound();
+        isInVictoryPanel = false;
+        Time.timeScale = 1;
     }
+
 
     public void ExitGame()
     {

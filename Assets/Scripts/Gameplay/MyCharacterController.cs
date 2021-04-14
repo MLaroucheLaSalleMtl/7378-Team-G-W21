@@ -9,6 +9,7 @@ public class MyCharacterController : MonoBehaviour
     private Animator anim;
     private Vector3 moveVector;
     private float verticalVelocity;
+    private AudioSource playerSFXSource;
     [SerializeField] private float speed = 6f;
 
     //Input system 
@@ -19,6 +20,9 @@ public class MyCharacterController : MonoBehaviour
     public bool inputSpecialAttack = false;
     public bool isFrozen = false;
     [SerializeField] private float inputTimer = 0.5f;
+
+
+
 
     // Input methods
     public void SetMove(Vector2 move)
@@ -77,6 +81,7 @@ public class MyCharacterController : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
+        playerSFXSource = GetComponent<AudioSource>();
     }
 
     private void Animate()
@@ -98,6 +103,7 @@ public class MyCharacterController : MonoBehaviour
         {
             inputTimer = gameObject.GetComponent<FighterStatus>().punchLockOut;
             StartCoroutine(AnimationRoutine(inputTimer));
+            PlaySFX("Whoosh");
             gameObject.GetComponent<FighterAnimation>().PunchAnimation();
             inputPunch = false;
         }
@@ -158,6 +164,22 @@ public class MyCharacterController : MonoBehaviour
     {
         isFrozen = true;
     }
+
+    public void VictoryWithNoControl()
+    {
+        isFrozen = true;
+    }
+
+  
+    public void PlaySFX(string clipName)
+    {
+        AudioClip clipToPlay = FindObjectOfType<SoundManager>().GetSFX(clipName);
+        if (clipToPlay != null)
+        {
+            playerSFXSource.PlayOneShot(clipToPlay);
+        }
+    }
+
 }
 
 

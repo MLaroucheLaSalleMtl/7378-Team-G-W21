@@ -159,6 +159,8 @@ public class TrainingManager : MonoBehaviour
         HealthReset();
     }
 
+
+
     public void ExitGame()
     {
         #if UNITY_EDITOR
