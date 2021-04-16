@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+//Nicholaos And Eduardo Worked on this Script 
+
 public class MyCharacterController : MonoBehaviour
 {
     private CharacterController controller;
@@ -12,7 +14,7 @@ public class MyCharacterController : MonoBehaviour
     private AudioSource playerSFXSource;
     [SerializeField] private float speed = 6f;
 
-    //Input system 
+    [Header("Input System")]
     public float inputHor, inputVer = 0f;
     public bool isBlocking = false;
     public bool inputPunch = false;
@@ -21,10 +23,6 @@ public class MyCharacterController : MonoBehaviour
     public bool isFrozen = false;
     [SerializeField] private float inputTimer = 0.5f;
 
-
-
-
-    // Input methods
     public void SetMove(Vector2 move)
     {
         if (isFrozen)
@@ -111,6 +109,7 @@ public class MyCharacterController : MonoBehaviour
         if (inputKick)
         {
             inputTimer = gameObject.GetComponent<FighterStatus>().kickLockOut;
+            PlaySFX("Woosh");
             StartCoroutine(AnimationRoutine(inputTimer));
             gameObject.GetComponent<FighterAnimation>().KickAnimation();
             inputKick = false;
@@ -168,6 +167,11 @@ public class MyCharacterController : MonoBehaviour
     public void VictoryWithNoControl()
     {
         isFrozen = true;
+    }
+
+    public void IsBlockingFemale()
+    {
+        isBlocking = true;
     }
 
   

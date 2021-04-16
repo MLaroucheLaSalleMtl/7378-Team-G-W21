@@ -6,6 +6,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 
+//Eduardo Worked on this Script 
+
 public class TutorialManager : MonoBehaviour
 {
     public static TutorialManager instance = null;

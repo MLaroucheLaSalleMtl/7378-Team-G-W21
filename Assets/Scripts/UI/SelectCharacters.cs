@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//Eduardo Worked on this Script
+
 public class SelectCharacters : MonoBehaviour
 {
     public GameObject[] Characters;

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Nicholaos And Eduardo Worked on this Script 
+
 public class FighterAnimation : MonoBehaviour
 {
     [SerializeField] private Animator animator;
@@ -14,6 +16,7 @@ public class FighterAnimation : MonoBehaviour
 
     public void VictoryAnimation()
     {
+        gameObject.GetComponent<MyCharacterController>().VictoryWithNoControl();
         animator.SetBool("Victory", true);
     }
 

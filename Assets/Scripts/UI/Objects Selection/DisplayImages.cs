@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+//Eduardo Worked on this Script
+
 public class DisplayImages : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public GameObject objImage;

@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+//Nicholaos Worked on this Script
+
 public class SelectMenu : MonoBehaviour
 {
     public static SelectMenu instance = null;
@@ -42,13 +44,6 @@ public class SelectMenu : MonoBehaviour
             // will enable or disable the panel 
             panels[i].SetActive(position == i); // position == i : true or false 
 
-            /*
-            if (position == i)
-            {
-                EventSystem.current.SetSelectedGameObject(null);
-                EventSystem.current.SetSelectedGameObject(defaultBtns[position]);
-            }
-            */
         }
     }
 }

@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
+//Eduardo Worked on this Script 
+
 public class TrainingManager : MonoBehaviour
 {
     public static TrainingManager instance = null;

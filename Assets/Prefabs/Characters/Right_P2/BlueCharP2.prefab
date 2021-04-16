@@ -2084,6 +2084,7 @@ MonoBehaviour:
   - {fileID: 1764898993554510197}
   - {fileID: 1764898994480636123}
   - {fileID: 350241038}
+  specialGain: 15
   fireball: {fileID: 0}
   fireballSpawn: {fileID: 0}
 --- !u!114 &1764898993284670468
@@ -2110,7 +2111,8 @@ MonoBehaviour:
   specialPoints: 0
   punchDamage: 10
   kickDamage: 15
-  specialDamage: 25
+  specialDamage: 30
+  sepcialGainWhenHit: 5
   punchLockOut: 0.24
   kickLockOut: 0.65
   specialLockOut: 0

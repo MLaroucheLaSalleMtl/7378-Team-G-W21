@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//Eduardo Worked on this Script 
+
 public class PlayerCamera : MonoBehaviour
 {
     private Transform[] playerTransforms;

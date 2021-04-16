@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e38aa30a0b4dff84fada1c4bbb292721, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireballDamage: 30
+  fireballDamage: 20
   fireballSpeed: 7
 --- !u!65 &8849338254907735845
 BoxCollider:

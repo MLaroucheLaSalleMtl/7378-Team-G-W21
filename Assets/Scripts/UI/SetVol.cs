@@ -5,6 +5,10 @@ using UnityEngine.UI;
 using UnityEngine.Audio;
 
 
+//Nicholaos worked on this script
+
+
+
 [RequireComponent(typeof(Slider))]
 public class SetVol : MonoBehaviour
 {
@@ -12,21 +16,17 @@ public class SetVol : MonoBehaviour
     [SerializeField] private string nameParam = null; 
     private Slider slider; 
 
-    // Start is called before the first frame update
     void Start()
     {
-        slider = GetComponent<Slider>(); 
-        float v = PlayerPrefs.GetFloat(nameParam, 0);
-        Debug.Log(v);
-        slider.value = v; 
-        audioM.SetFloat(nameParam, v);
+        slider = GetComponent<Slider>();
+        slider.value = PlayerPrefs.GetFloat(nameParam, 0.50f);
     }
 
-    public void SetVolume(float vol) 
+    public void SetVolumeTest()
     {
-        audioM.SetFloat(nameParam, vol); 
-        slider.value = vol;
-        PlayerPrefs.SetFloat(nameParam, vol); 
+        float sliderVal = slider.value;
+        audioM.SetFloat(nameParam, Mathf.Log10(sliderVal) * 20);
+        PlayerPrefs.SetFloat(nameParam, sliderVal);
     }
 
 }

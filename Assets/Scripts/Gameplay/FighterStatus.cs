@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//Nicholaos And Eduardo Worked on this Script 
+
 public class FighterStatus : MonoBehaviour
 {
     [Header("Player Manager")]
@@ -21,6 +23,7 @@ public class FighterStatus : MonoBehaviour
     public float punchDamage;
     public float kickDamage;
     public float specialDamage;
+    public float sepcialGainWhenHit = 5f;
 
     [Header("Move LockOut")]
     public float punchLockOut;
@@ -30,7 +33,6 @@ public class FighterStatus : MonoBehaviour
     public float blockStun;
     public float playerPushBack = 10f;
     public float playerPushbackOnBlock = 20f;
-
 
     void Start()
     {
@@ -49,7 +51,6 @@ public class FighterStatus : MonoBehaviour
         health = settingsSelection.health;
         punchDamage = settingsSelection.punchDamage;
         kickDamage = settingsSelection.kickDamage;
-        specialDamage = settingsSelection.specialDamage;
     }
 
     public void ReceiveDamage(float damage)
@@ -57,6 +58,7 @@ public class FighterStatus : MonoBehaviour
         if (gameObject.GetComponent<MyCharacterController>().isBlocking)
         {
             StartCoroutine(HitStunBlockStunLockOut(blockStun));
+            gameObject.GetComponent<MyCharacterController>().PlaySFX("Sharp Punch");
             PushBackOnBlock();
             gameObject.GetComponent<FighterAnimation>().BlockedHitAnimation();
             return;
@@ -64,7 +66,9 @@ public class FighterStatus : MonoBehaviour
         else
         {
             health -= damage;
+            SpecialOnHit(sepcialGainWhenHit);
             PushBack();
+            gameObject.GetComponent<MyCharacterController>().PlaySFX("Sharp Punch");
             StartCoroutine(HitStunBlockStunLockOut(hitStun));
             gameObject.GetComponent<FighterAnimation>().TorsoHitAnimation();
 
@@ -110,6 +114,11 @@ public class FighterStatus : MonoBehaviour
         specialCounter += Time.deltaTime;
     }
 
+    public void SpecialOnHit(float specialGained)
+    {
+        specialPoints += specialGained;
+    }
+
     public bool HasSpecial()
     {
         return hasSpecial;
@@ -146,7 +155,6 @@ public class FighterStatus : MonoBehaviour
         }
     }
 
-
     private IEnumerator HitStunBlockStunLockOut(float freezeTime)   
     {
         float time = freezeTime;
@@ -163,5 +171,4 @@ public class FighterStatus : MonoBehaviour
         gameObject.GetComponent<MyCharacterController>().isFrozen = false;
         yield break;
     }
-
 }

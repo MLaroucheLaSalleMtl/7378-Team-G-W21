@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 
+
+//Eduardo and Hayedeh Worked on this Script
+
 public class PauseMenu : MonoBehaviour
 {
     GameManager manager;

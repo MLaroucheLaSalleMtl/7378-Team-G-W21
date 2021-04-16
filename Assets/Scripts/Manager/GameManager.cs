@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 
+//Nicholaos And Eduardo Worked on this Script 
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
@@ -259,7 +261,6 @@ public class GameManager : MonoBehaviour
                 if (!isInVictoryPanel)
                 {
                     player2.GetComponent<FighterStatus>().VictoryDance();
-                    player2.GetComponent<MyCharacterController>().VictoryWithNoControl();
                     Invoke("OnVictoryDanceFinish", 4f);
                     RoundUnsubs();
                     isInVictoryPanel = true;
@@ -279,7 +280,6 @@ public class GameManager : MonoBehaviour
                 if (!isInVictoryPanel)
                 {
                     player1.GetComponent<FighterStatus>().VictoryDance();
-                    player1.GetComponent<MyCharacterController>().VictoryWithNoControl();
                     Invoke("OnVictoryDanceFinish", 4f);
                     RoundUnsubs();
                     isInVictoryPanel = true;
@@ -307,13 +307,6 @@ public class GameManager : MonoBehaviour
         fighterStatus.Clear();
         LoadScene.instance.ReloadScene();
         RoundSubs();
-    }
-
-    IEnumerator WaitForEnd()
-    {
-        yield return new WaitForSecondsRealtime(timeToVictoryScreen);
-
-        yield break;
     }
 
     public void SetMatchEndedTrue()
@@ -384,7 +377,6 @@ public class GameManager : MonoBehaviour
         isInVictoryPanel = false;
         Time.timeScale = 1;
     }
-
 
     public void ExitGame()
     {

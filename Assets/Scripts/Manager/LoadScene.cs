@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//Nicholaos Worked on this Script 
+
 public class LoadScene : MonoBehaviour
 {
     public static LoadScene instance = null;
@@ -24,6 +26,7 @@ public class LoadScene : MonoBehaviour
     public void LoadMainMenu()
     {
         SceneManager.LoadScene(0);
+        SoundManager.instance.ChangeMusic("Free Sci-Fi Track 1 (Loop)");
     }
 
     // loads the next level if it detects one in the next scene index position

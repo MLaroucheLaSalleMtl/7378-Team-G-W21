@@ -19,6 +19,6 @@ public class SplashScreen : MonoBehaviour
         AsyncOperation gameLevel = SceneManager.LoadSceneAsync(0);
 
         yield return new WaitForSeconds(3);
-        Application.LoadLevel(1);
+        //Application.LoadLevel(1);
     }
 }

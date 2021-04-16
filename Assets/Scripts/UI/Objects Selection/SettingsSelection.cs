@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//Eduardo Worked on this Script
+
 public class SettingsSelection : MonoBehaviour
 {
     public static SettingsSelection instance = null;
@@ -48,13 +50,17 @@ public class SettingsSelection : MonoBehaviour
     {
         if(val == 0)
         {
-            timer = 60;
+            timer = 99;
         }
         else if(val == 1)
         {
-            timer = 90;
+            timer = 60;
         }
         else if(val == 2)
+        {
+            timer = 90;
+        }
+        else if (val == 3)
         {
             timer = 120;
         }
@@ -64,11 +70,11 @@ public class SettingsSelection : MonoBehaviour
     {
         if (val == 0)
         {
-            specialPoints = 80;
+            specialPoints = 100;
         }
         else if (val == 1)
         {
-            specialPoints = 100;
+            specialPoints = 80;
         }
         else if (val == 2)
         {
@@ -80,11 +86,11 @@ public class SettingsSelection : MonoBehaviour
     {
         if (val == 0)
         {
-            health = 80;
+            health = 100;
         }
         else if (val == 1)
         {
-            health = 100;
+            health = 80;
         }
         else if (val == 2)
         {
@@ -126,21 +132,9 @@ public class SettingsSelection : MonoBehaviour
         {
             kickDamage = 20;
         }
-    }
-
-    public void OnSpecialSelection(int val)
-    {
-        if (val == 0)
+        else if (val == 3)
         {
-            specialDamage = 20;
-        }
-        else if (val == 1)
-        {
-            specialDamage = 25;
-        }
-        else if (val == 2)
-        {
-            specialDamage = 30;
+            punchDamage = 100;
         }
     }
 

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Nicholaos and Eduardo Worked on this Script
+
 public class EndScreenVictory : MonoBehaviour
 {
     [Header("Instances")]

@@ -2,13 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//Nicholaos Sifakis worked on this script
+
+
 public class AttackSystem : MonoBehaviour
 {
     public Collider[] colliders;
 
     private GameObject otherPlayer;
     private float damage = 0;
+    [SerializeField] private float specialGain = 15f;
 
+    [Space]
+    [Header ("Projectiles")]
     [SerializeField] private GameObject fireball;
     [SerializeField] private GameObject fireballSpawn;
 
@@ -34,6 +41,7 @@ public class AttackSystem : MonoBehaviour
 
             //gameObject -> attacking //otherPlayer -> being attacked
             otherPlayer.GetComponent<FighterStatus>().ReceiveDamage(damage);
+            gameObject.transform.root.GetComponent<FighterStatus>().SpecialOnHit(specialGain);
         }
     }
 
@@ -60,6 +68,7 @@ public class AttackSystem : MonoBehaviour
             //gameObject -> attacking //otherPlayer -> being attacked
 
             otherPlayer.GetComponent<FighterStatus>().ReceiveDamage(damage);
+            gameObject.transform.root.GetComponent<FighterStatus>().SpecialOnHit(specialGain);
         }
     }
     
@@ -91,6 +100,7 @@ public class AttackSystem : MonoBehaviour
 
     private void LaunchFireball()
     {
+        gameObject.GetComponent<MyCharacterController>().PlaySFX("Small Fireball");
         Instantiate(fireball, fireballSpawn.transform.position, Quaternion.identity);
     }
 }

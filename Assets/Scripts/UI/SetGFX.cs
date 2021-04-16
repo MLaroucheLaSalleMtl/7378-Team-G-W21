@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//Nicholaos worked on this script
 
 public class SetGFX : MonoBehaviour
 {

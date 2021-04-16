@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
+//Nicholaos on this script
+
+
 public class SetResolution : MonoBehaviour
 {
     private Dropdown dropdown; // refrence to the current dropdown 

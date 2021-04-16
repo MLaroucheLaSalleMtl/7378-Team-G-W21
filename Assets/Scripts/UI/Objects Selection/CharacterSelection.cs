@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+//Eduardo Worked on this Script 
+
 public class CharacterSelection : MonoBehaviour
 {
     public static CharacterSelection instance = null;

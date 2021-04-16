@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Original prototype for character selection written by Hayedeh
+
 public class GetCharacters : MonoBehaviour
 {
     public GameObject[] Characters;

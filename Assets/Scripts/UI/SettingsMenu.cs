@@ -4,6 +4,10 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
+
+//Nicholaos worked on this script
+
+
 public class SettingsMenu : MonoBehaviour
 {
 

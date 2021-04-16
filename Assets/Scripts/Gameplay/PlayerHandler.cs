@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+//Eduardo Worked on this Script 
+
 public class PlayerHandler : MonoBehaviour
 {
     GameManager manager;

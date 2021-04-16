@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//Nicholaos, Eduardo and Hayedeh Worked on this Script
+
 public class CountdownController : MonoBehaviour
 {
     [Header("Instances")]
@@ -12,9 +14,12 @@ public class CountdownController : MonoBehaviour
     [Header("Start Screen Manager")]
     [SerializeField] private float timeFightersImagesAreActivated = 1.6f;
     [SerializeField] private float timeBetweenCountdownTxt = 1.0f;
+    [SerializeField] private float timeForPlayerOneText = 4.0f;
     [SerializeField] private Text countdownText;
+    [SerializeField] private Text playerOneInstruct;
     [SerializeField] private GameObject fightersImages;
     [SerializeField] private GameObject countdown;
+    [SerializeField] private GameObject playerInstruct;
     [SerializeField] private GameObject countdownPanel;
     [SerializeField] private GameObject[] player1Images;
     [SerializeField] private GameObject[] player2Images;
@@ -25,14 +30,27 @@ public class CountdownController : MonoBehaviour
         manager = GameManager.instance;
         characterSelection = CharacterSelection.instance;
 
-        OpenPanel();
-        StartCoroutine(CountdownCoroutine());
+        if(manager.roundCounterP1 == 0 && manager.roundCounterP2 == 0)
+        {
+            OpenPanel();
+            StartCoroutine(CountdownCoroutine());
+        }
+        else
+        {
+            OpenPanel();
+            Debug.Log("Round Start after first round");
+            StartCoroutine(RoundStartCoroutine());
+        }
     }
 
     IEnumerator CountdownCoroutine()
     {
         yield return new WaitForSecondsRealtime(timeFightersImagesAreActivated);
         FighterImagesDisplayOff();
+        PlayerInstructDisplay();
+        playerOneInstruct.text = "Player One Press Any Key";
+        yield return new WaitForSecondsRealtime(timeForPlayerOneText);
+        PlayerInstructDisplay();
         CountdownDisplayOn();
         countdownText.text = "3";
         yield return new WaitForSecondsRealtime(timeBetweenCountdownTxt);
@@ -48,6 +66,17 @@ public class CountdownController : MonoBehaviour
         yield return null;
     }
 
+    IEnumerator RoundStartCoroutine()
+    {
+        FighterImagesDisplayOff();
+        PlayerInstructDisplay();
+        playerOneInstruct.text = "Player One Press AnyKey";
+        yield return new WaitForSecondsRealtime(timeForPlayerOneText);
+        PlayerInstructDisplay();
+        ClosePanel();
+        yield return null;
+    }
+
     public void OpenPanel()
     {
         Time.timeScale = 0f;
@@ -59,11 +88,6 @@ public class CountdownController : MonoBehaviour
     {
         countdownPanel.SetActive(false);
         Time.timeScale = 1f;
-    }
-
-    public void FighterImagesDisplayOn()
-    {
-        fightersImages.SetActive(true);
     }
 
     public void FighterImagesDisplayOff()
@@ -85,9 +109,16 @@ public class CountdownController : MonoBehaviour
         countdown.SetActive(true);
     }
 
-    public void CountdownDisplayOff()
+    public void PlayerInstructDisplay()
     {
-        countdown.SetActive(false);
+        if (playerInstruct.activeSelf)
+        {
+            playerInstruct.SetActive(false);
+        }
+        else
+        {
+            playerInstruct.SetActive(true);
+        }
     }
 
     public void GetPlayerImages()

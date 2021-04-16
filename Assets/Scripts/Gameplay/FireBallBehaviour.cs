@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Nicholaos Worked on this Script 
+
 public class FireBallBehaviour : MonoBehaviour
 {
     [SerializeField] private float fireballDamage = 30f;
