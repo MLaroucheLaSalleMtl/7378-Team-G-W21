@@ -6,8 +6,21 @@ using UnityEngine;
 
 public class FighterAnimation : MonoBehaviour
 {
+    [Header("Player Manager")]
     [SerializeField] private Animator animator;
-    [SerializeField] private int characterNumber;
+    private MyCharacterController controller;
+    private FighterStatus fighterStatus;
+
+    private void Awake()
+    {
+        CastComponents();
+    }
+
+    private void CastComponents()
+    {
+        controller = gameObject.GetComponent<MyCharacterController>();
+        fighterStatus = gameObject.GetComponent<FighterStatus>();
+    }
 
     public void DeadAnimation()
     {
@@ -16,7 +29,7 @@ public class FighterAnimation : MonoBehaviour
 
     public void VictoryAnimation()
     {
-        gameObject.GetComponent<MyCharacterController>().VictoryWithNoControl();
+        controller.VictoryWithNoControl();
         animator.SetBool("Victory", true);
     }
 
@@ -47,7 +60,7 @@ public class FighterAnimation : MonoBehaviour
 
     public void SpecialAnimation()
     {
-        switch (gameObject.GetComponent<FighterStatus>().playerID)
+        switch (fighterStatus.playerID)
         {
             case 0:
                 animator.SetTrigger("SpecialAttack0");

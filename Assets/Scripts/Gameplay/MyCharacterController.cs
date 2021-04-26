@@ -7,8 +7,11 @@ using UnityEngine.InputSystem;
 
 public class MyCharacterController : MonoBehaviour
 {
+    [Header("Player Manager")]
     private CharacterController controller;
     private Animator anim;
+    private FighterAnimation fighterAnimation;
+    private FighterStatus fighterStatus;
     private Vector3 moveVector;
     private float verticalVelocity;
     private AudioSource playerSFXSource;
@@ -22,6 +25,20 @@ public class MyCharacterController : MonoBehaviour
     public bool inputSpecialAttack = false;
     public bool isFrozen = false;
     [SerializeField] private float inputTimer = 0.5f;
+
+    void Start()
+    {
+        CastComponents();
+    }
+
+    private void CastComponents()
+    {
+        fighterStatus = gameObject.GetComponent<FighterStatus>();
+        fighterAnimation = gameObject.GetComponent<FighterAnimation>();
+        controller = GetComponent<CharacterController>();
+        anim = GetComponent<Animator>();
+        playerSFXSource = GetComponent<AudioSource>();
+    }
 
     public void SetMove(Vector2 move)
     {
@@ -72,14 +89,7 @@ public class MyCharacterController : MonoBehaviour
         }
 
         isBlocking = blocking;
-        gameObject.GetComponent<FighterAnimation>().BlockAnimation(isBlocking);
-    }
-
-    void Start()
-    {
-        controller = GetComponent<CharacterController>();
-        anim = GetComponent<Animator>();
-        playerSFXSource = GetComponent<AudioSource>();
+        fighterAnimation.BlockAnimation(isBlocking);
     }
 
     private void Animate()
@@ -99,28 +109,25 @@ public class MyCharacterController : MonoBehaviour
 
         if (inputPunch)
         {
-            inputTimer = gameObject.GetComponent<FighterStatus>().punchLockOut;
             PlaySFX("Woosh");
-            StartCoroutine(AnimationRoutine(inputTimer));
-            gameObject.GetComponent<FighterAnimation>().PunchAnimation();
+            StartCoroutine(AnimationRoutine(fighterStatus.punchLockOut));
+            fighterAnimation.PunchAnimation();
             inputPunch = false;
         }
 
         if (inputKick)
         {
-            inputTimer = gameObject.GetComponent<FighterStatus>().kickLockOut;
             PlaySFX("Woosh");
-            StartCoroutine(AnimationRoutine(inputTimer));
-            gameObject.GetComponent<FighterAnimation>().KickAnimation();
+            StartCoroutine(AnimationRoutine(fighterStatus.kickLockOut));
+            fighterAnimation.KickAnimation();
             inputKick = false;
         }
 
         if (inputSpecialAttack)
         {
-            inputTimer = gameObject.GetComponent<FighterStatus>().specialLockOut;
-            StartCoroutine(AnimationRoutine(inputTimer));
-            gameObject.GetComponent<FighterAnimation>().SpecialAnimation();
-            gameObject.GetComponent<FighterStatus>().ResetSpecialAttack();
+            StartCoroutine(AnimationRoutine(fighterStatus.specialLockOut));
+            fighterAnimation.SpecialAnimation();
+            fighterStatus.ResetSpecialAttack();
             inputSpecialAttack = false;
         }
 
@@ -134,7 +141,6 @@ public class MyCharacterController : MonoBehaviour
         controller.Move(moveVector * Time.deltaTime);
         Animate();
     }
-
 
     private IEnumerator AnimationRoutine(float freezeTime)
     {
@@ -173,7 +179,6 @@ public class MyCharacterController : MonoBehaviour
     {
         isBlocking = true;
     }
-
   
     public void PlaySFX(string clipName)
     {
@@ -183,11 +188,4 @@ public class MyCharacterController : MonoBehaviour
             playerSFXSource.PlayOneShot(clipToPlay);
         }
     }
-
 }
-
-
-
-
-
-

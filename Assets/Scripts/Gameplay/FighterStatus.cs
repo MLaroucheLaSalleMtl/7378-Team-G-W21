@@ -13,6 +13,8 @@ public class FighterStatus : MonoBehaviour
     public int specialWeight = 1;
     public float specialCounter = 0f;
     public float specialCounterRate = 15f;
+    private MyCharacterController controller;
+    private FighterAnimation fighterAnimation;
 
     [Header("Stats")]
     [SerializeField] private SettingsSelection settingsSelection;
@@ -23,7 +25,7 @@ public class FighterStatus : MonoBehaviour
     public float punchDamage;
     public float kickDamage;
     public float specialDamage;
-    public float sepcialGainWhenHit = 5f;
+    public float specialGainWhenHit = 5f;
 
     [Header("Move LockOut")]
     public float punchLockOut;
@@ -37,12 +39,19 @@ public class FighterStatus : MonoBehaviour
     void Start()
     {
         settingsSelection = SettingsSelection.instance;
+        CastComponents();
         GetStats();
     }
 
     private void FixedUpdate()
     {
         SpecialUpdate();
+    }
+
+    private void CastComponents()
+    {
+        controller = gameObject.GetComponent<MyCharacterController>();
+        fighterAnimation = gameObject.GetComponent<FighterAnimation>();
     }
 
     public void GetStats()
@@ -55,35 +64,35 @@ public class FighterStatus : MonoBehaviour
 
     public void ReceiveDamage(float damage)
     {
-        if (gameObject.GetComponent<MyCharacterController>().isBlocking)
+        if (controller.isBlocking)
         {
             StartCoroutine(HitStunBlockStunLockOut(blockStun));
-            gameObject.GetComponent<MyCharacterController>().PlaySFX("Sharp Punch");
+            controller.PlaySFX("Sharp Punch");
             PushBackOnBlock();
-            gameObject.GetComponent<FighterAnimation>().BlockedHitAnimation();
+            fighterAnimation.BlockedHitAnimation();
             return;
         }
         else
         {
             health -= damage;
-            SpecialOnHit(sepcialGainWhenHit);
+            SpecialOnHit(specialGainWhenHit);
             PushBack();
-            gameObject.GetComponent<MyCharacterController>().PlaySFX("Sharp Punch");
+            controller.PlaySFX("Sharp Punch");
             StartCoroutine(HitStunBlockStunLockOut(hitStun));
-            gameObject.GetComponent<FighterAnimation>().TorsoHitAnimation();
+            fighterAnimation.TorsoHitAnimation();
 
             if (health <= 0)
             {
                 dead = true;
-                gameObject.GetComponent<MyCharacterController>().DeadWithNoControl();
-                gameObject.GetComponent<FighterAnimation>().DeadAnimation();
+                controller.DeadWithNoControl();
+                fighterAnimation.DeadAnimation();
             }
         }
     }
 
     public void VictoryDance()
     {
-        gameObject.GetComponent<FighterAnimation>().VictoryAnimation();
+        fighterAnimation.VictoryAnimation();
     }
 
     public void SpecialUpdate()
@@ -133,12 +142,12 @@ public class FighterStatus : MonoBehaviour
     {
         if (gameObject.transform.root.CompareTag("Player1"))    
         {
-            gameObject.GetComponent<MyCharacterController>().PushedBack(playerPushBack);
+            controller.PushedBack(playerPushBack);
         }
 
         if (gameObject.transform.root.CompareTag("Player2"))
         {
-            gameObject.GetComponent<MyCharacterController>().PushedBack(-playerPushBack);
+            controller.PushedBack(-playerPushBack);
         }
     }
 
@@ -146,21 +155,21 @@ public class FighterStatus : MonoBehaviour
     {
         if (gameObject.transform.root.CompareTag("Player1"))
         {
-            gameObject.GetComponent<MyCharacterController>().PushedBack(playerPushbackOnBlock);
+            controller.PushedBack(playerPushbackOnBlock);
         }
 
         if (gameObject.transform.root.CompareTag("Player2"))
         {
-            gameObject.GetComponent<MyCharacterController>().PushedBack(-playerPushbackOnBlock);
+            controller.PushedBack(-playerPushbackOnBlock);
         }
     }
 
     private IEnumerator HitStunBlockStunLockOut(float freezeTime)   
     {
         float time = freezeTime;
-        gameObject.GetComponent<MyCharacterController>().isFrozen = true;
-        gameObject.GetComponent<MyCharacterController>().inputHor = 0;
-        gameObject.GetComponent<MyCharacterController>().inputVer = 0;
+        controller.isFrozen = true;
+        controller.inputHor = 0;
+        controller.inputVer = 0;
 
         while (time >= 0)
         {
@@ -168,7 +177,7 @@ public class FighterStatus : MonoBehaviour
             yield return null;
         }
 
-        gameObject.GetComponent<MyCharacterController>().isFrozen = false;
+        controller.isFrozen = false;
         yield break;
     }
 }

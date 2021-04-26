@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
     public int roundCounterP1;
     public int roundCounterP2;
     public bool isMatchEnded = false;
+    private bool isInVictoryPanel = false;
 
     public System.Action onVictoryDanceFinish;
 
@@ -249,8 +250,6 @@ public class GameManager : MonoBehaviour
         specialRatioTextP2.text = fighterStatus[1].specialPoints.ToString("0");
     }
 
-    private bool isInVictoryPanel = false;
-
     public void RoundEnded()
     {
         if (fighterStatus[0].health <= 0)
@@ -260,7 +259,7 @@ public class GameManager : MonoBehaviour
             {
                 if (!isInVictoryPanel)
                 {
-                    player2.GetComponent<FighterStatus>().VictoryDance();
+                    fighterStatus[1].VictoryDance();
                     Invoke("OnVictoryDanceFinish", 4f);
                     RoundUnsubs();
                     isInVictoryPanel = true;
@@ -279,7 +278,7 @@ public class GameManager : MonoBehaviour
             {
                 if (!isInVictoryPanel)
                 {
-                    player1.GetComponent<FighterStatus>().VictoryDance();
+                    fighterStatus[0].VictoryDance();
                     Invoke("OnVictoryDanceFinish", 4f);
                     RoundUnsubs();
                     isInVictoryPanel = true;
