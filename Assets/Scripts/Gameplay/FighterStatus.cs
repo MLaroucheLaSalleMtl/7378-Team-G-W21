@@ -13,6 +13,7 @@ public class FighterStatus : MonoBehaviour
     public int specialWeight = 1;
     public float specialCounter = 0f;
     public float specialCounterRate = 15f;
+    private ParticleSystem blockSpark;
     private MyCharacterController controller;
     private FighterAnimation fighterAnimation;
 
@@ -39,6 +40,7 @@ public class FighterStatus : MonoBehaviour
     void Start()
     {
         settingsSelection = SettingsSelection.instance;
+        blockSpark = GetComponentInChildren<ParticleSystem>();
         CastComponents();
         GetStats();
     }
@@ -68,6 +70,7 @@ public class FighterStatus : MonoBehaviour
         {
             StartCoroutine(HitStunBlockStunLockOut(blockStun));
             controller.PlaySFX("Sharp Punch");
+            blockSpark.Play();
             PushBackOnBlock();
             fighterAnimation.BlockedHitAnimation();
             return;
